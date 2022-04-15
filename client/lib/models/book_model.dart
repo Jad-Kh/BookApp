@@ -1,5 +1,5 @@
 class Book {
-  int id;
+  int isbn;
   String title;
   String publisher;
   String date;
@@ -12,7 +12,7 @@ class Book {
   String bigthumbnail;
 
   Book({
-    required this.id,
+    required this.isbn,
     required this.title,
     required this.publisher,
     required this.date,
@@ -28,7 +28,7 @@ class Book {
 
 List<Book> books_carousel = [
   Book(
-    id: 1,
+    isbn: 1,
     title: "Other Words for Home",
     publisher: "Jasmine Warga",
     date: "2005-11-09",
@@ -44,7 +44,7 @@ List<Book> books_carousel = [
     bigthumbnail: 'assets/images/other_words_for_home.jpg',
   ),
   Book(
-    id: 2,
+    isbn: 2,
     title: "The Metropolist",
     publisher: "Seth Fried",
     date: "2007-03-06",
@@ -60,7 +60,7 @@ List<Book> books_carousel = [
     bigthumbnail: 'assets/images/the_metropolist.jpg',
   ),
   Book(
-    id: 3,
+    isbn: 3,
     title: "The Tiny Dragon",
     publisher: "Rupert Carter",
     date: "2013-01-02",
@@ -79,7 +79,7 @@ List<Book> books_carousel = [
 
 List<Book> books_list = [
   Book(
-    id: 1,
+    isbn: 1,
     title: "The Tiny Dragon",
     publisher: "Rupert Carter",
     date: "2013-01-02",
@@ -95,7 +95,7 @@ List<Book> books_list = [
     bigthumbnail: 'assets/images/the_tiny_dragon.jpg',
   ),
   Book(
-    id: 2,
+    isbn: 2,
     title: "Underland",
     publisher: "Robert Macfarlane",
     date: "2015-04-04",
@@ -111,7 +111,7 @@ List<Book> books_list = [
     bigthumbnail: 'assets/images/underland.jpg',
   ),
   Book(
-    id: 3,
+    isbn: 3,
     title: "Other Words for Home",
     publisher: "Jasmine Warga",
     date: "2005-11-09",
@@ -127,7 +127,7 @@ List<Book> books_list = [
     bigthumbnail: 'assets/images/other_words_for_home.jpg',
   ),
   Book(
-    id: 4,
+    isbn: 4,
     title: "The Metropolist",
     publisher: "Seth Fried",
     date: "2007-03-06",

@@ -11,6 +11,35 @@ class BookScreen extends StatefulWidget {
 }
 
 class _BookScreenState extends State<BookScreen> {
+  double _containerHeight = 535;
+  double _textHeight = 80;
+  double _paddingBelow = 125;
+  double _paddingInfo = 375;
+  double _infoSize = 145;
+  double _fontSize = 13;
+  bool _large = true;
+
+  _updateState() {
+    setState(() {
+      if(_large) {
+        _containerHeight = 350;
+        _paddingBelow = 310;
+        _fontSize = 18;
+        _textHeight = 200;
+        _paddingInfo = 150;
+        _infoSize = 95;
+      } else {
+        _containerHeight = 535;
+        _paddingBelow = 125;
+        _fontSize = 13;
+        _textHeight = 80;
+        _paddingInfo = 375;
+        _infoSize = 145;
+      }
+      _large = !_large;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,12 +47,13 @@ class _BookScreenState extends State<BookScreen> {
         children: <Widget>[
           Stack(
             children: <Widget>[
-              Container(
+              AnimatedContainer(
+                duration: Duration(milliseconds: 0),
                 width: MediaQuery.of(context).size.width,
-                height: 535,
+                height: _containerHeight,
                 color: Colors.white,
                 child: Hero(
-                  tag: widget.book.id,
+                  tag: widget.book.isbn,
                   child: ClipRRect(
                     child: Opacity(
                       opacity: 0.5,
@@ -55,6 +85,20 @@ class _BookScreenState extends State<BookScreen> {
                     ),
                     Row(
                       children: <Widget>[
+                        _large 
+                        ?
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(175, 130, 130, 130),
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: IconButton(
+                            icon: Icon(FontAwesomeIcons.sortAmountUp),
+                            iconSize: 25.0,
+                            color: Theme.of(context).primaryColor,
+                            onPressed: () => _updateState()
+                          ),
+                        ) : 
                         Container(
                           decoration: BoxDecoration(
                             color: Color.fromARGB(175, 130, 130, 130),
@@ -64,7 +108,7 @@ class _BookScreenState extends State<BookScreen> {
                             icon: Icon(FontAwesomeIcons.sortAmountDown),
                             iconSize: 25.0,
                             color: Theme.of(context).primaryColor,
-                            onPressed: () => Navigator.pop(context),
+                            onPressed: () => _updateState()
                           ),
                         ),
                       ],
@@ -74,16 +118,22 @@ class _BookScreenState extends State<BookScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(100.0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: 250,
-                  child: Hero(
-                    tag: widget.book.thumbnail,
-                    child: ClipRRect(
-                      child: Image(
-                        image: AssetImage(widget.book.thumbnail),
-                        colorBlendMode: BlendMode.modulate,
-                        fit: BoxFit.cover,
+                child: Visibility(
+                  visible: _large,
+                  maintainState: true,
+                  maintainAnimation: true,
+                  maintainSize: false,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    height: 250,
+                    child: Hero(
+                      tag: widget.book.thumbnail,
+                      child: ClipRRect(
+                        child: Image(
+                          image: AssetImage(widget.book.thumbnail),
+                          colorBlendMode: BlendMode.modulate,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -92,9 +142,9 @@ class _BookScreenState extends State<BookScreen> {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 20.0, top: 375),
+                    padding: EdgeInsets.only(left: 20.0, top: _paddingInfo),
                     child: Container(
-                      height: 145.0,
+                      height: _infoSize,
                       width: 320.0,
                       decoration: BoxDecoration(
                         color: Color.fromARGB(175, 130, 130, 130),
@@ -128,94 +178,91 @@ class _BookScreenState extends State<BookScreen> {
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 27.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 20.0,
-                                        width: 35.0,
-                                        child: Icon(
-                                          FontAwesomeIcons.solidStar,
-                                          size: 20.0,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: Text(
-                                          widget.book.ratingaverage.toString(),
-                                          style: TextStyle(
-                                            fontSize: 17.0,
-                                            color:
-                                                Theme.of(context).primaryColor,
+                            Visibility(
+                              visible: _large,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 27.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          height: 20.0,
+                                          width: 35.0,
+                                          child: Icon(
+                                            FontAwesomeIcons.solidStar,
+                                            size: 20.0,
+                                            color: Theme.of(context).primaryColor,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 27.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 20.0,
-                                        width: 35.0,
-                                        child: Icon(
-                                          FontAwesomeIcons.solidCalendar,
-                                          size: 20.0,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: Text(
-                                          widget.book.date,
-                                          style: TextStyle(
-                                            fontSize: 17.0,
-                                            color:
-                                                Theme.of(context).primaryColor,
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text(
+                                            widget.book.ratingaverage.toString(),
+                                            style: TextStyle(
+                                              fontSize: 17.0,
+                                              color: Theme.of(context).primaryColor,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 27.0),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Container(
-                                        height: 20.0,
-                                        width: 35.0,
-                                        child: Icon(
-                                          FontAwesomeIcons.bookOpen,
-                                          size: 20.0,
-                                          color: Theme.of(context).primaryColor,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 10.0),
-                                        child: Text(
-                                          widget.book.pages.toString(),
-                                          style: TextStyle(
-                                            fontSize: 17.0,
-                                            color:
-                                                Theme.of(context).primaryColor,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 27.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          height: 20.0,
+                                          width: 35.0,
+                                          child: Icon(
+                                            FontAwesomeIcons.solidCalendar,
+                                            size: 20.0,
+                                            color: Theme.of(context).primaryColor,
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text(
+                                            widget.book.date,
+                                            style: TextStyle(
+                                              fontSize: 17.0,
+                                              color: Theme.of(context).primaryColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 27.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        Container(
+                                          height: 20.0,
+                                          width: 35.0,
+                                          child: Icon(
+                                            FontAwesomeIcons.bookOpen,
+                                            size: 20.0,
+                                            color: Theme.of(context).primaryColor,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 10.0),
+                                          child: Text(
+                                            widget.book.pages.toString(),
+                                            style: TextStyle(
+                                              fontSize: 17.0,
+                                              color: Theme.of(context).primaryColor,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -247,16 +294,20 @@ class _BookScreenState extends State<BookScreen> {
                       children: [
                         Stack(
                           children: <Widget>[
-                            Container(
-                              height: 80.0,
-                              width: 320.0,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0, left: 25.0),
-                                child: Text(
-                                  widget.book.description,
-                                  style: TextStyle(
-                                    fontSize: 13.0,
-                                    color: Theme.of(context).primaryColor,
+                            Scrollbar(
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  height: _textHeight,
+                                  width: 320.0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10.0, left: 15.0),
+                                    child: Text(
+                                      widget.book.description,
+                                      style: TextStyle(
+                                        fontSize: _fontSize,
+                                        color: Theme.of(context).primaryColor,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -269,7 +320,7 @@ class _BookScreenState extends State<BookScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 125.0, left: 15.0),
+                padding: EdgeInsets.only(top: _paddingBelow, left: 15.0),
                 child: Row(
                   children: <Widget>[
                     Container(
