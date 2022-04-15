@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'screens/home_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -12,10 +14,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Travel UI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xFF3EBACE),
-        accentColor: Color(0xFFD8ECF1),
-        scaffoldBackgroundColor: Color(0xFFF3F5F7),
+        primaryColor: const Color.fromARGB(255, 255, 255, 255),
+        secondaryHeaderColor: const Color.fromARGB(255, 77, 77, 77),
+        accentColor: const Color.fromARGB(255, 238, 154, 76),
+        scaffoldBackgroundColor: const Color.fromARGB(0, 44, 44, 44),
       ),
+      home: HomeScreen(),
     );
   }
 }
