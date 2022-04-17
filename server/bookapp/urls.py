@@ -1,7 +1,7 @@
-from rest_framework import routers
-from .api import BookViewSet
+from django.contrib import admin
+from django.urls import path
+from bookapp.views import books
 
-router = routers.DefaultRouter()
-router.register('api/books', BookViewSet, 'bookapp')
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('books/', books.book_list)
+]

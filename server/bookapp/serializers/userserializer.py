@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from bookapp.models import User
+from bookapp.models.user import User
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
