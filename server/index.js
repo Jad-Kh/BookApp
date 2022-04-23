@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const PORT = process.env.PORT || 5050
+
 const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -10,8 +12,8 @@ dotenv.config();
 
 app.use(express.json());
 app.use(helmet());
-app.use(morgan("common"));
+app.use(morgan("dev"));
 
-app.listen(8800, () => {
-    console.log("Running Backend!");
+app.listen(PORT, () => {
+    console.log(`Running Backend on Port ${PORT}`);
 });
