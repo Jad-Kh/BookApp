@@ -4,7 +4,7 @@ var serviceAccount = require("path/to/serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://bookapp-7c27c-default-rtdb.europe-west1.firebasedatabase.app"
+  databaseURL: process.env.DATABASE_URL
 });
 
 const db = admin.firestore();

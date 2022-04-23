@@ -1,14 +1,14 @@
 const firebase = require('firebase');
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCiNg3XY_B5gy6kyto6nkrxVgh_AcQxrK4",
-    authDomain: "bookapp-7c27c.firebaseapp.com",
-    databaseURL: "https://bookapp-7c27c-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "bookapp-7c27c",
-    storageBucket: "bookapp-7c27c.appspot.com",
-    messagingSenderId: "292711585769",
-    appId: "1:292711585769:web:ec5ae2e9a9d34b5b699d78",
-    measurementId: "G-W2F6WLYJ9G"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID ,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MESAUREMENT_ID
 };
 
   firebase.initializeApp(firebaseConfig);
