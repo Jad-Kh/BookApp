@@ -14,6 +14,12 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("dev"));
 
+const authRoute = require('../server/routes/authRoute');
+const userRoute = require('../server/routes/userRoute');
+
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+
 app.listen(PORT, () => {
     console.log(`Running Backend on Port ${PORT}`);
 });

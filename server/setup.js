@@ -11,6 +11,6 @@ const firebaseConfig = {
     measurementId: process.env.MESAUREMENT_ID
 };
 
-  firebase.initializeApp(firebaseConfig);
+const db = firebase.initializeApp(firebaseConfig);
   
-  module.exports = { firebase };
+module.exports = db;

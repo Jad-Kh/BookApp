@@ -13,3 +13,5 @@ class Book {
         this.bigthumbnail = bigthumbnail;
     }
 }
+
+module.exports = Book;
