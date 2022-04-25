@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:client/models/user_model.dart';
 import 'package:client/widgets/book_list.dart';
 import 'package:client/widgets/book_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
+
+  HomeScreen();
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -35,12 +39,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    User currentUser = User(username: "test", email: "test", password: "test", lists: [], friends: [], requests: []);
     return Scaffold(
       body: SafeArea(
         child: ListView(
           padding: EdgeInsets.symmetric(vertical: 30.0),
-          children: <Widget>[
-            
+          children: <Widget>[    
             Padding(
               padding: EdgeInsets.only(left: 20.0, right: 120.0),
               child: Text(
@@ -190,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             SizedBox(height: 10.0),
-            DestinationCarousel(),
+            DestinationCarousel(user: currentUser),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: _options

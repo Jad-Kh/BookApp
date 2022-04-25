@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../screens/book_screen.dart';
 
-class DestinationCarousel extends StatelessWidget {
+class DestinationCarousel extends StatefulWidget {
+  final User user;
+  DestinationCarousel({required this.user});
+
+  @override
+  _DestinationCarouselState createState() => _DestinationCarouselState();
+}
+
+class _DestinationCarouselState extends State<DestinationCarousel> {
   @override
   Widget build(BuildContext context) {
     return Column(

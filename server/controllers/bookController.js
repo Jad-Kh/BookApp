@@ -9,7 +9,6 @@ exports.getBookByDynamic = async(request, response) => {
             search += `in${key}:${value}&`
         }
     })
-    console.log(search)
     try {
         const call = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${search}key=${KEY}`)
         const books = []
