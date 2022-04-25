@@ -2,6 +2,7 @@ class User {
   String username;
   String email;
   String password;
+  int points;
   List<String> lists;
   List<String> friends;
   List<String> requests;
@@ -10,6 +11,7 @@ class User {
     required this.username,
     required this.email,
     required this.password,
+    required this.points,
     required this.lists,
     required this.friends,
     required this.requests

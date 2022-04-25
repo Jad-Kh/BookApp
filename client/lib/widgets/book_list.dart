@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../screens/book_screen.dart';
 
-class BookList extends StatelessWidget {
+class BookList extends StatefulWidget {
+  final User user;
+  BookList({required this.user});
+
+  @override
+  _BookListState createState() => _BookListState();
+}
+
+class _BookListState extends State<BookList> {
   @override
   Widget build(BuildContext context) {
     return Column(

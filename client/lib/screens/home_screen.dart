@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User currentUser = User(username: "test", email: "test", password: "test", lists: [], friends: [], requests: []);
+    User currentUser = User(username: "test", email: "test", password: "test", points: 0, lists: [], friends: [], requests: []);
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Username',
+                    currentUser.username,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor,
                       fontSize: 24.0,
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            '235 Points',
+                            currentUser.points.toString() + ' Points',
                             style: TextStyle(
                               fontSize: 12.0,
                               color: Theme.of(context).primaryColor,
@@ -205,7 +205,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                   .toList(),
             ),
-            BookList(),
+            BookList(user: currentUser),
           ],
         ),
       ),
