@@ -17,7 +17,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Future save() async {
     var response = await Dio().post("http://10.0.2.2:5050/api/auth/login",
         data: <String, String>{'email': user.email, 'password': user.password});
-    print(response);
     Navigator.push(
         context, new MaterialPageRoute(builder: (context) => HomeScreen())
     );

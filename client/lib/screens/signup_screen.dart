@@ -17,7 +17,6 @@ class _SignupScreenState extends State<SignupScreen> {
   Future save() async {
     var response = await Dio().post("http://10.0.2.2:5050/api/auth/register",
         data: <String, String>{'username': user.username,'email': user.email, 'password': user.password});
-    print(response);
     Navigator.push(
         context, new MaterialPageRoute(builder: (context) => LoginScreen()));
   }
@@ -137,9 +136,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: TextEditingController(text: user.email),
+                    controller: TextEditingController(text: user.password),
                     onChanged: (value) {
-                      user.email = value;
+                      user.password = value;
                     },
                     validator: (value) {
                       if (value!.isEmpty) {
