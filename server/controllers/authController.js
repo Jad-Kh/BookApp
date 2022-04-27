@@ -42,7 +42,7 @@ exports.logInUser = async(request, response) => {
                 if(!valid) {
                     return response.status(404).json("wrong password")
                 } else {
-                    return response.status(200).json('logged in')
+                    return response.status(200).json(doc.data())
                 }
             })
         })

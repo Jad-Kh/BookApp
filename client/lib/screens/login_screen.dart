@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'package:provider/provider.dart';
 import 'package:client/screens/home_screen.dart';
 import 'package:client/screens/signup_screen.dart';
+import 'package:client/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
 import '../models/user_model.dart';
 import 'package:flutter/material.dart';
@@ -17,8 +19,10 @@ class _LoginScreenState extends State<LoginScreen> {
   Future save() async {
     var response = await Dio().post("http://10.0.2.2:5050/api/auth/login",
         data: <String, String>{'email': user.email, 'password': user.password});
+    Provider.of<AuthProvider>(context, listen: false)
+            .getAuth(User.fromJson(response.data));
     Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => HomeScreen())
+        context, new MaterialPageRoute(builder: (context) => HomeScreen()),
     );
   }
 
@@ -102,9 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: TextFormField(
-                    controller: TextEditingController(text: user.email),
+                    controller: TextEditingController(text: user.password),
                     onChanged: (value) {
-                      user.email = value;
+                      user.password = value;
                     },
                     validator: (value) {
                       if (value!.isEmpty) {

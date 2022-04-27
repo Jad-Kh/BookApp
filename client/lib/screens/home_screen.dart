@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:client/providers/auth_provider.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/widgets/book_list.dart';
 import 'package:client/widgets/book_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -39,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    User currentUser = User(username: "test", email: "test", password: "test", points: 0, lists: [], friends: [], requests: []);
+    User currentUser = Provider.of<AuthProvider>(context).user;
     return Scaffold(
       body: SafeArea(
         child: ListView(

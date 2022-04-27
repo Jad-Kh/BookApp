@@ -1,3 +1,5 @@
+import 'package:provider/provider.dart';
+import 'package:client/providers/auth_provider.dart';
 import 'package:client/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
@@ -12,7 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
+      ],
+      child: MaterialApp(
       title: 'Flutter Travel UI',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -26,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignupScreen(),
       },
       home: LoginScreen(),
+    ),
     );
   }
 }
