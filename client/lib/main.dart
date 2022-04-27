@@ -1,5 +1,7 @@
+import 'package:client/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
+import 'screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +21,11 @@ class MyApp extends StatelessWidget {
         accentColor: const Color.fromARGB(255, 238, 154, 76),
         scaffoldBackgroundColor: const Color.fromARGB(0, 44, 44, 44),
       ),
-      home: HomeScreen(),
+      routes: {
+        '/login': (context) => LoginScreen(),
+        '/signup': (context) => SignupScreen(),
+      },
+      home: LoginScreen(),
     );
   }
 }
