@@ -12,7 +12,11 @@ exports.filter = (item) => {
     let ratingnumber
     let thumbnail
 
-    isbn = nullCheck(item?.volumeInfo.industryIdentifiers[1]?.identifier)
+    if(item?.volumeInfo.industryIdentifiers[1]?.type == "ISBN_10") {
+        isbn = nullCheck(item?.volumeInfo.industryIdentifiers[1]?.identifier)
+    } else {
+        isbn = nullCheck(item?.volumeInfo.industryIdentifiers[0]?.identifier)
+    }   
     title = nullCheck(item.volumeInfo.title)
     author = nullCheck(item.volumeInfo.author)
     publisher = nullCheck(item.volumeInfo.publisher)

@@ -2,6 +2,24 @@ const KEY = process.env.GOOGLE_BOOKS_API_KEY
 const { filter } = require('../filters/bookFilter')
 const axios = require('axios')
 
+exports.getManyBooksByISBN = async(request, response) => {
+    console.log("Hello")
+    try {
+        const books = []
+        await Promise.all(
+            request.body.isbns.map(async(isbn) => {
+                const call = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${KEY}`)
+                call.data.items.map(async(item) => {
+                    books.push(filter(item))
+                })
+            })
+        )
+        return response.status(200).json(books)
+    } catch(error) {
+        return response.status(500).json(error)
+    }
+}
+
 exports.getBookByDynamic = async(request, response) => {
     let search = ""
     JSON.parse(JSON.stringify(request.body), (key, value) => {

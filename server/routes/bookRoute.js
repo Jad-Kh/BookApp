@@ -2,6 +2,11 @@ const router = require('express').Router();
 const booksController = require('../controllers/bookController');
 
 router.get(
+    '/many',
+    booksController.getManyBooksByISBN
+);
+
+router.get(
     '/dynamic',
     booksController.getBookByDynamic
 );
