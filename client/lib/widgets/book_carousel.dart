@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:dio/dio.dart';
 import '../screens/book_screen.dart';
 
 class DestinationCarousel extends StatefulWidget {
@@ -14,8 +16,21 @@ class DestinationCarousel extends StatefulWidget {
 }
 
 class _DestinationCarouselState extends State<DestinationCarousel> {
+  var isbns = ["0062747827", "0486437272", "165429215X"]; 
+  List<dynamic> list = [];
+  List<Book> books = []; 
+  Future getBooks() async {
+    isbns.forEach((isbn) async { 
+      var response = await Dio().get('http://10.0.2.2:5050/api/books/' + isbn);
+      Book newBook = Book.fromJson(response.data[0]);
+      list.add(newBook);
+    });
+    books = list.cast<Book>();
+  }
+
   @override
   Widget build(BuildContext context) {
+    getBooks();
     return Column(
       children: <Widget>[
         Padding(
@@ -51,9 +66,9 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
           height: 325.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: books_carousel.length,
+            itemCount: isbns.length,
             itemBuilder: (BuildContext context, int index) {
-              Book book = books_carousel[index];
+              Book book = books[index];
               return GestureDetector(
                 onTap: () => Navigator.push(
                   context,
@@ -146,11 +161,10 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
                               tag: book.thumbnail,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
-                                child: Image(
+                                child: Container(
                                   height: 250.0,
                                   width: 200.0,
-                                  image: AssetImage(book.thumbnail),
-                                  fit: BoxFit.cover,
+                                  child: Image.network(book.thumbnail, width: 250, height: 200, fit: BoxFit.contain)
                                 ),
                               ),
                             ),

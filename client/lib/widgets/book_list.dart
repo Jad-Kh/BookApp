@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
@@ -14,8 +15,21 @@ class BookList extends StatefulWidget {
 }
 
 class _BookListState extends State<BookList> {
+  var isbns = ["0062747827", "0486437272", "165429215X"]; 
+  List<dynamic> list = [];
+  List<Book> books = []; 
+  Future getBooks() async {
+    isbns.forEach((isbn) async { 
+      var response = await Dio().get('http://10.0.2.2:5050/api/books/' + isbn);
+      Book newBook = Book.fromJson(response.data[0]);
+      list.add(newBook);
+    });
+    books = list.cast<Book>();
+  }
+
   @override
   Widget build(BuildContext context) {
+    getBooks();
     return Column(
       children: [
         Padding(
@@ -25,9 +39,9 @@ class _BookListState extends State<BookList> {
               height: 430,
               child: ListView.builder(
                 padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-                itemCount: books_list.length,
+                itemCount: isbns.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Book book = books_list[index];
+                  Book book = books[index];
                   return Stack(
                     children: <Widget>[
                       Container(
@@ -125,8 +139,10 @@ class _BookListState extends State<BookList> {
                                 ],
                               ),
                               SizedBox(height: 5.0),
+                              book.categories.length != 0 ?
                               Row(
                                 children: <Widget>[
+                                  book.categories.length >= 1 ?
                                   Container(
                                     padding: EdgeInsets.all(5.0),
                                     width: 95.0,
@@ -142,8 +158,9 @@ class _BookListState extends State<BookList> {
                                         fontSize: 12.0,
                                       ),
                                     ),
-                                  ),
+                                  ) : Container(),
                                   SizedBox(width: 10.0),
+                                  book.categories.length >= 2 ?
                                   Container(
                                     padding: EdgeInsets.all(5.0),
                                     width: 95.0,
@@ -159,9 +176,9 @@ class _BookListState extends State<BookList> {
                                         fontSize: 12.0,
                                       ),
                                     ),
-                                  ),
+                                  ) : Container(),
                                 ],
-                              )
+                              ) : Row()
                             ],
                           ),
                         ),
@@ -172,12 +189,9 @@ class _BookListState extends State<BookList> {
                         bottom: 15.0,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(7.0),
-                          child: Image(
+                          child: Container(
                             width: 100.0,
-                            image: AssetImage(
-                              book.thumbnail,
-                            ),
-                            fit: BoxFit.cover,
+                            child: Image.network(book.thumbnail, width: 100, fit: BoxFit.contain)
                           ),
                         ),
                       ),

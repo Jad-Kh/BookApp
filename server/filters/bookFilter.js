@@ -23,8 +23,8 @@ exports.filter = (item) => {
     date = nullCheck(item.volumeInfo.publishedDate)
     description = nullCheck(item.volumeInfo.description)
     pages = nullCheckNum(item.volumeInfo.pageCount)
-    categories = nullCheck(item.volumeInfo.categories)
-    ratingaverage = nullCheckNum(item.volumeInfo.averageRating)
+    categories = nullCheckList(item.volumeInfo.categories)
+    ratingaverage = nullCheckDouble(item.volumeInfo.averageRating)
     ratingnumber = nullCheckNum(item.volumeInfo.ratingsCount)
     thumbnail = nullCheck(item.volumeInfo.imageLinks?.thumbnail)
 
@@ -49,7 +49,7 @@ const nullCheck = (field) => {
     if(field) {
         return field
     } else {
-        return ""
+        return "none"
     }
 }
 
@@ -58,5 +58,21 @@ const nullCheckNum = (field) => {
         return field
     } else {
         return 0
+    }
+}
+
+const nullCheckDouble = (field) => {
+    if(field) {
+        return field
+    } else {
+        return 0.001
+    }
+}
+
+const nullCheckList = (field) => {
+    if(field) {
+        return field
+    } else {
+        return []
     }
 }

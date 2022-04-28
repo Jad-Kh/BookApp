@@ -3,7 +3,6 @@ const { filter } = require('../filters/bookFilter')
 const axios = require('axios')
 
 exports.getManyBooksByISBN = async(request, response) => {
-    console.log("Hello")
     try {
         const books = []
         await Promise.all(

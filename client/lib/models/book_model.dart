@@ -1,15 +1,14 @@
 class Book {
-  int isbn;
+  String isbn;
   String title;
   String publisher;
   String date;
   String description;
   int pages;
   List<String> categories;
-  int ratingaverage;
+  double ratingaverage;
   int ratingnumber;
   String thumbnail;
-  String bigthumbnail;
 
   Book({
     required this.isbn,
@@ -21,14 +20,31 @@ class Book {
     required this.categories,
     required this.ratingaverage,
     required this.ratingnumber,
-    required this.thumbnail,
-    required this.bigthumbnail,
+    required this.thumbnail
   });
+
+  factory Book.fromJson(Map<String, dynamic> json) {
+    var categoriesObj = json['categories'] ?? [];
+
+    return Book(
+      isbn: json['isbn'] ?? "",
+      title: json['title'] ?? "",
+      publisher: json['publisher'] ?? "",
+      date: json['date'] ?? "",
+      description: json['description'] ?? "",
+      pages: json['pages'] ?? 0,
+      categories: new List<String>.from(categoriesObj), 
+      ratingaverage: json['ratingaverage'] ?? 0.0001,
+      ratingnumber: json['ratingnumber'] ?? 0,
+      thumbnail: json['thumnail'] ?? ""
+    );
+  }
 }
+
 
 List<Book> books_carousel = [
   Book(
-    isbn: 1,
+    isbn: "1",
     title: "Other Words for Home",
     publisher: "Jasmine Warga",
     date: "2005-11-09",
@@ -41,10 +57,9 @@ List<Book> books_carousel = [
     ratingaverage: 4,
     ratingnumber: 1781,
     thumbnail: 'assets/images/other_words_for_home.jpg',
-    bigthumbnail: 'assets/images/other_words_for_home.jpg',
   ),
   Book(
-    isbn: 2,
+    isbn: "2",
     title: "The Metropolist",
     publisher: "Seth Fried",
     date: "2007-03-06",
@@ -57,10 +72,9 @@ List<Book> books_carousel = [
     ratingaverage: 3,
     ratingnumber: 1239,
     thumbnail: 'assets/images/the_metropolist.jpg',
-    bigthumbnail: 'assets/images/the_metropolist.jpg',
   ),
   Book(
-    isbn: 3,
+    isbn: "3",
     title: "The Tiny Dragon",
     publisher: "Rupert Carter",
     date: "2013-01-02",
@@ -73,13 +87,12 @@ List<Book> books_carousel = [
     ratingaverage: 4,
     ratingnumber: 437,
     thumbnail: 'assets/images/the_tiny_dragon.jpg',
-    bigthumbnail: 'assets/images/the_tiny_dragon.jpg',
   ),
 ];
 
 List<Book> books_list = [
   Book(
-    isbn: 1,
+    isbn: "1",
     title: "The Tiny Dragon",
     publisher: "Rupert Carter",
     date: "2013-01-02",
@@ -92,10 +105,9 @@ List<Book> books_list = [
     ratingaverage: 4,
     ratingnumber: 437,
     thumbnail: 'assets/images/the_tiny_dragon.jpg',
-    bigthumbnail: 'assets/images/the_tiny_dragon.jpg',
   ),
   Book(
-    isbn: 2,
+    isbn: "2",
     title: "Underland",
     publisher: "Robert Macfarlane",
     date: "2015-04-04",
@@ -108,10 +120,9 @@ List<Book> books_list = [
     ratingaverage: 4,
     ratingnumber: 1567,
     thumbnail: 'assets/images/underland.jpg',
-    bigthumbnail: 'assets/images/underland.jpg',
   ),
   Book(
-    isbn: 3,
+    isbn: "3",
     title: "Other Words for Home",
     publisher: "Jasmine Warga",
     date: "2005-11-09",
@@ -124,10 +135,9 @@ List<Book> books_list = [
     ratingaverage: 4,
     ratingnumber: 1781,
     thumbnail: 'assets/images/other_words_for_home.jpg',
-    bigthumbnail: 'assets/images/other_words_for_home.jpg',
   ),
   Book(
-    isbn: 4,
+    isbn: "4",
     title: "The Metropolist",
     publisher: "Seth Fried",
     date: "2007-03-06",
@@ -140,6 +150,5 @@ List<Book> books_list = [
     ratingaverage: 3,
     ratingnumber: 1239,
     thumbnail: 'assets/images/the_metropolist.jpg',
-    bigthumbnail: 'assets/images/the_metropolist.jpg',
   ),
 ];
