@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                   .toList(),
             ),
-            BookList(user: currentUser),
+              BookList(user: currentUser, index: _selectedIndex),
           ],
         ),
       ),
