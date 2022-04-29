@@ -6,7 +6,7 @@ class Book {
   String description;
   int pages;
   List<String> categories;
-  double ratingaverage;
+  var ratingaverage;
   int ratingnumber;
   String thumbnail;
 
@@ -34,9 +34,9 @@ class Book {
       description: json['description'] ?? "",
       pages: json['pages'] ?? 0,
       categories: new List<String>.from(categoriesObj), 
-      ratingaverage: json['ratingaverage'] ?? 0.0001,
+      ratingaverage: json['ratingaverage'] ?? 0.001,
       ratingnumber: json['ratingnumber'] ?? 0,
-      thumbnail: json['thumnail'] ?? ""
+      thumbnail: json['thumbnail'] ?? ""
     );
   }
 }

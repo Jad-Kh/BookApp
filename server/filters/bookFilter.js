@@ -2,7 +2,6 @@ exports.filter = (item) => {
 
     let isbn
     let title
-    let author
     let publisher
     let date
     let description
@@ -18,7 +17,6 @@ exports.filter = (item) => {
         isbn = nullCheck(item?.volumeInfo.industryIdentifiers[0]?.identifier)
     }   
     title = nullCheck(item.volumeInfo.title)
-    author = nullCheck(item.volumeInfo.author)
     publisher = nullCheck(item.volumeInfo.publisher)
     date = nullCheck(item.volumeInfo.publishedDate)
     description = nullCheck(item.volumeInfo.description)
@@ -31,7 +29,6 @@ exports.filter = (item) => {
     const book = {
         'isbn': isbn,
         'title': title,
-        'author': author,
         'publisher': publisher,
         'date': date,
         'description': description,
