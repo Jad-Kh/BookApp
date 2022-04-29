@@ -57,11 +57,12 @@ class _BookScreenState extends State<BookScreen> {
                   child: ClipRRect(
                     child: Opacity(
                       opacity: 0.5,
-                      child: Image(
-                        image: AssetImage(widget.book.thumbnail),
-                        colorBlendMode: BlendMode.modulate,
-                        fit: BoxFit.cover,
-                      ),
+                        child: widget.book.thumbnail.isEmpty ? Placeholder()
+                          : Image.network(
+                          "${widget.book.thumbnail}",
+                          width: 100,
+                          fit: BoxFit.fill,
+                        ),
                     ),
                   ),
                 ),
@@ -129,10 +130,11 @@ class _BookScreenState extends State<BookScreen> {
                     child: Hero(
                       tag: widget.book.thumbnail,
                       child: ClipRRect(
-                        child: Image(
-                          image: AssetImage(widget.book.thumbnail),
-                          colorBlendMode: BlendMode.modulate,
-                          fit: BoxFit.cover,
+                        child: widget.book.thumbnail.isEmpty ? Placeholder()
+                          : Image.network(
+                          "${widget.book.thumbnail}",
+                          width: 100,
+                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
