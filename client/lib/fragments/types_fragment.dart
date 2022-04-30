@@ -1,26 +1,20 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../models/book_model.dart';
+import '../providers/book_provider.dart';
 
 class TypesFragment extends StatelessWidget {
-  var isbns = ["1594866260", "0520221524", "0689852185", "034546205X"];
-  List<Book> books = [];
-  Future<List<Book>> getBooks() async {
-    List<Book> list = [];
-    for (var isbn in isbns) {
-      var response = await Dio().get('http://10.0.2.2:5050/api/books/' + isbn);
-      Book newBook = Book.fromJson(response.data[0]);
-      list.add(newBook);
-    }
-    ;
+  Future<List<Book>> getBooks(futureList) async {
+    List<Book> list = futureList;
     return list;
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Book>>(
-        future: getBooks(),
+        future: getBooks(Provider.of<BookProvider>(context).typesList),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Column(
@@ -32,7 +26,7 @@ class TypesFragment extends StatelessWidget {
                       height: 430,
                       child: ListView.builder(
                         padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-                        itemCount: isbns.length,
+                        itemCount: 4,
                         itemBuilder: (BuildContext context, int index) {
                           Book book = snapshot.data!.elementAt(index);
                           return Stack(
