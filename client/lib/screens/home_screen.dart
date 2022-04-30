@@ -17,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   int _currentTab = 0;
-  List<String> _options = ["Most Readers", "Latest", "Most Types"];
+  List<String> _options = ["Magazines", "Latest", "Your Types"];
 
   Widget _buildOption(int index) {
     return GestureDetector(

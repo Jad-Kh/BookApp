@@ -4,13 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/book_model.dart';
 
 class LatestFragment extends StatelessWidget {
-  var isbns = ["1594866260", "0520221524", "0689852185", "034546205X"];
   List<Book> books = [];
   Future<List<Book>> getBooks() async {
     List<Book> list = [];
-    for (var isbn in isbns) {
-      var response = await Dio().get('http://10.0.2.2:5050/api/books/' + isbn);
-      Book newBook = Book.fromJson(response.data[0]);
+    var response = await Dio().get('http://10.0.2.2:5050/api/books/newest');
+    for (var item in response.data) {
+      Book newBook = Book.fromJson(item);
       list.add(newBook);
     }
     ;
@@ -32,7 +31,7 @@ class LatestFragment extends StatelessWidget {
                       height: 430,
                       child: ListView.builder(
                         padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-                        itemCount: isbns.length,
+                        itemCount: 5,
                         itemBuilder: (BuildContext context, int index) {
                           Book book = snapshot.data!.elementAt(index);
                           return Stack(

@@ -11,11 +11,13 @@ exports.filter = (item) => {
     let ratingnumber
     let thumbnail
 
-    if(item?.volumeInfo.industryIdentifiers[1]?.type == "ISBN_10") {
-        isbn = nullCheck(item?.volumeInfo.industryIdentifiers[1]?.identifier)
-    } else {
-        isbn = nullCheck(item?.volumeInfo.industryIdentifiers[0]?.identifier)
-    }   
+    if(item?.volumeInfo.industryIdentifiers) {
+        if(item?.volumeInfo.industryIdentifiers[1]?.type == "ISBN_10") {
+            isbn = nullCheck(item?.volumeInfo.industryIdentifiers[1]?.identifier)
+        } else {
+            isbn = nullCheck(item?.volumeInfo.industryIdentifiers[0]?.identifier)
+        }   
+    } 
     title = nullCheck(item.volumeInfo.title)
     publisher = nullCheck(item.volumeInfo.publisher)
     date = nullCheck(item.volumeInfo.publishedDate)

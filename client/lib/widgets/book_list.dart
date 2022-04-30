@@ -1,5 +1,5 @@
 import 'package:client/fragments/latest_fragment.dart';
-import 'package:client/fragments/readers_fragment.dart';
+import 'package:client/fragments/magazines_fragment.dart';
 import 'package:client/fragments/types_fragment.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class _BookListState extends State<BookList> {
   @override
   Widget build(BuildContext context) {
     if(widget.index == 0) {
-      return ReadersFragment();
+      return MagazinesFragment();
     } else
     if(widget.index == 1) {
       return LatestFragment();

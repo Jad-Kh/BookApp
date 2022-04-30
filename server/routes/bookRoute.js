@@ -2,6 +2,16 @@ const router = require('express').Router();
 const booksController = require('../controllers/bookController');
 
 router.get(
+    '/magazines',
+    booksController.getBooksByMagazines
+);
+
+router.get(
+    '/newest',
+    booksController.getBooksByNewest
+);
+
+router.get(
     '/many',
     booksController.getManyBooksByISBN
 );

@@ -2,6 +2,32 @@ const KEY = process.env.GOOGLE_BOOKS_API_KEY
 const { filter } = require('../filters/bookFilter')
 const axios = require('axios')
 
+exports.getBooksByMagazines = async(request, response) => {
+    try {   
+        const call = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=h&langRestrict=en&maxResults=10&printType=magazines&key=${KEY}`)
+        const books = []
+        call.data.items.map(async(item) => {
+            books.push(filter(item))
+        })
+        return response.status(200).json(books)
+    } catch(error) {
+        return response.status(500).json(error)
+    }
+}
+
+exports.getBooksByNewest = async(request, response) => {
+    try {   
+        const call = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=2022&langRestrict=en&maxResults=5&orderBy=newest&key=${KEY}`)
+        const books = []
+        call.data.items.map(async(item) => {
+            books.push(filter(item))
+        })
+        return response.status(200).json(books)
+    } catch(error) {
+        return response.status(500).json(error)
+    }
+}
+
 exports.getManyBooksByISBN = async(request, response) => {
     try {
         const books = []
