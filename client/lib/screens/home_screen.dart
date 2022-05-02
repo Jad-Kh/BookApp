@@ -1,3 +1,4 @@
+import 'package:client/screens/profile_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:client/providers/auth_provider.dart';
@@ -6,9 +7,9 @@ import 'package:client/widgets/book_list.dart';
 import 'package:client/widgets/book_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-
 import '../models/book_model.dart';
 import '../providers/book_provider.dart';
+import '../widgets/bottom_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -242,53 +243,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-          canvasColor: Theme.of(context).scaffoldBackgroundColor,
-        ),
-        child: BottomNavigationBar(
-          currentIndex: _currentTab,
-          onTap: (int value) {
-            setState(() {
-              _currentTab = value;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Theme.of(context).primaryColor,
-                size: 30.0,
-              ),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: Theme.of(context).secondaryHeaderColor,
-                size: 30.0,
-              ),
-              label: "Search",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: Theme.of(context).secondaryHeaderColor,
-                size: 30.0,
-              ),
-              label: "Profile",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.list,
-                color: Theme.of(context).secondaryHeaderColor,
-                size: 30.0,
-              ),
-              label: "Lists",
-            ),
-          ],
-        ),
-      ),
+      bottomNavigationBar: BottomNavbar(currentTab: 0),
     );
   }
 }
