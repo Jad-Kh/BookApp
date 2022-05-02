@@ -4,8 +4,11 @@ import 'package:client/screens/home_screen.dart';
 import 'package:client/screens/signup_screen.dart';
 import 'package:client/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
+import '../models/list_model.dart';
 import '../models/user_model.dart';
 import 'package:flutter/material.dart';
+
+import '../providers/lists_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -21,9 +24,23 @@ class _LoginScreenState extends State<LoginScreen> {
         data: <String, String>{'email': user.email, 'password': user.password});
     Provider.of<AuthProvider>(context, listen: false)
             .getAuth(User.fromJson(response.data));
+    buildProfile(user);
     Navigator.push(
         context, new MaterialPageRoute(builder: (context) => HomeScreen()),
     );
+  }
+  
+  Future buildProfile(user) async {
+    List<UserList> userLists = [];
+    print(user.email);
+    var listResponse = await Dio().get('http://http://10.0.2.2:5050/api/lists/user/' + user.email);
+    for (var item in listResponse.data) {
+      UserList newList = UserList.fromJson(item);
+      userLists.add(newList);
+    }
+    ;
+        Provider.of<ListProvider>(context, listen: false)
+            .getLists(userLists);
   }
 
   User user = User(

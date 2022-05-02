@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import '../models/book_model.dart';
 
 class BookProvider extends ChangeNotifier {

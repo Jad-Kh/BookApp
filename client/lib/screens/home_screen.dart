@@ -3,12 +3,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:client/providers/auth_provider.dart';
 import 'package:client/models/user_model.dart';
+import 'package:client/models/list_model.dart';
 import 'package:client/widgets/book_list.dart';
 import 'package:client/widgets/book_carousel.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import '../models/book_model.dart';
 import '../providers/book_provider.dart';
+import '../providers/lists_provider.dart';
 import '../widgets/bottom_navbar.dart';
 
 class HomeScreen extends StatefulWidget {

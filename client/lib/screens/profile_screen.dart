@@ -3,10 +3,10 @@ import 'package:provider/provider.dart';
 import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/bottom_navbar.dart';
+import '../widgets/lists_carousel.dart';
 
 class ProfileScreen extends StatefulWidget {
   final User user;
-
   ProfileScreen({required this.user});
 
   @override
@@ -60,7 +60,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           SizedBox(
             height: 30,
-          ),          
+          ), 
+          Container(
+              child: ListsCarousel(user: widget.user),
+          ),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

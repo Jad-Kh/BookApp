@@ -1,4 +1,5 @@
 import 'package:client/providers/book_provider.dart';
+import 'package:client/providers/lists_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:client/providers/auth_provider.dart';
 import 'package:client/screens/signup_screen.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => BookProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => ListProvider(),
         ),
       ],
       child: MaterialApp(
