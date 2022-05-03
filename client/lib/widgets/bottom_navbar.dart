@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
 import '../screens/home_screen.dart';
-import '../screens/profile_screen.dart';
+import '../screens/lists_screen.dart';
 
 class BottomNavbar extends StatefulWidget {
   int currentTab;
@@ -31,9 +31,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
               Navigator.push(
                 context, new MaterialPageRoute(builder: (context) => HomeScreen())
               );
-            if(value == 2)
+            if(value == 3)
               Navigator.push(
-                context, new MaterialPageRoute(builder: (context) => ProfileScreen(user: user))
+                context, new MaterialPageRoute(builder: (context) => ListsScreen())
               );
           },
           items: [

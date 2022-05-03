@@ -50,7 +50,8 @@ class _LoginScreenState extends State<LoginScreen> {
       points: 0,
       lists: [],
       friends: [],
-      requests: []);
+      requests: [],
+      recommendations: []);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

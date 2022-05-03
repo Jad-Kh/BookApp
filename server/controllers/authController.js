@@ -19,7 +19,8 @@ exports.createUser = async(request, response) => {
             points: 0,
             lists: [],
             friends: [],
-            requests: []
+            requests: [],
+            recommendation: []
         }
 
         await usersRef.doc().set(user)

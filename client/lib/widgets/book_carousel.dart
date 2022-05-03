@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
@@ -7,15 +5,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dio/dio.dart';
 import '../screens/book_screen.dart';
 
-class DestinationCarousel extends StatefulWidget {
+class BookCarousel extends StatefulWidget {
   final User user;
-  DestinationCarousel({required this.user});
+  BookCarousel({required this.user});
 
   @override
-  _DestinationCarouselState createState() => _DestinationCarouselState();
+  _BookCarouselState createState() => _BookCarouselState();
 }
 
-class _DestinationCarouselState extends State<DestinationCarousel> {
+class _BookCarouselState extends State<BookCarousel> {
   var isbns = ["0062747827", "0809117541", "0520221524"]; 
   List<Book> books = []; 
   Future<List<Book>> getBooks() async {

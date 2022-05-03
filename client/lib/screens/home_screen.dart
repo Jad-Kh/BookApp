@@ -1,4 +1,3 @@
-import 'package:client/screens/profile_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:client/providers/auth_provider.dart';
@@ -145,92 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 20.0),
-            Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Container(
-                    height: 50.0,
-                    width: 320.0,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).secondaryHeaderColor,
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                height: 20.0,
-                                width: 35.0,
-                                child: Icon(
-                                  FontAwesomeIcons.bookOpen,
-                                  size: 20.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                              Text(
-                                'Library',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                height: 20.0,
-                                width: 35.0,
-                                child: Icon(
-                                  Icons.person,
-                                  size: 22.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                              Text(
-                                'Profile',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Container(
-                                height: 20.0,
-                                width: 35.0,
-                                child: Icon(
-                                  Icons.people,
-                                  size: 22.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                              Text(
-                                'Friends',
-                                style: TextStyle(
-                                  fontSize: 12.0,
-                                  color: Theme.of(context).primaryColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            DestinationCarousel(user: currentUser),
+            SizedBox(height: 40.0),
+            BookCarousel(user: currentUser),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: _options
