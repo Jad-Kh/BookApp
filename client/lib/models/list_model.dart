@@ -2,22 +2,22 @@ import 'book_model.dart';
 
 class UserList {
   String title;
-  String userId;
   List<Book> items;
 
   UserList({
     required this.title,
-    required this.userId,
     required this.items,
   });
 
   factory UserList.fromJson(Map<String, dynamic> json) {
-    var listsObj = json['items'];
+    List<Book> templist = [];
+    for(var item in json['books']){
+     templist.add(Book.fromJson(item));
+    }
 
     return UserList(
-      title: json['username'],
-      userId: json['email'],
-      items: new List<Book>.from(listsObj),
+      title: json['title'],
+      items: templist,
     );
   }
 } 

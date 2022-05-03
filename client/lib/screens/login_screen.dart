@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future buildProfile(user) async {
     List<UserList> userLists = [];
     print(user.email);
-    var listResponse = await Dio().get('http://http://10.0.2.2:5050/api/lists/user/' + user.email);
+    var listResponse = await Dio().get('http://10.0.2.2:5050/api/lists/user/' + user.email);
     for (var item in listResponse.data) {
       UserList newList = UserList.fromJson(item);
       userLists.add(newList);

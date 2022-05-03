@@ -27,7 +27,7 @@ exports.getUserLists = async(request, response) => {
                     })
                 )
                 userList = {
-                    title: list.title,
+                    title: list.data().title,
                     books: books,
                 }
                 userLists.push(userList)

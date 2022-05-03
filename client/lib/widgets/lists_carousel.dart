@@ -32,18 +32,6 @@ class _ListsCarouselState extends State<ListsCarousel> {
                   color: Theme.of(context).primaryColor,
                 ),
               ),
-              GestureDetector(
-                onTap: () => print('See All'),
-                child: Text(
-                  'See All',
-                  style: TextStyle(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ),
             ],
           ),
         ),
@@ -56,7 +44,7 @@ class _ListsCarouselState extends State<ListsCarousel> {
               UserList list = lists[index];
               return Container(
                 margin: EdgeInsets.all(10.0),
-                width: 240.0,
+                width: 130.0,
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: <Widget>[
@@ -64,9 +52,9 @@ class _ListsCarouselState extends State<ListsCarousel> {
                       bottom: 15.0,
                       child: Container(
                         height: 120.0,
-                        width: 240.0,
+                        width: 130.0,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: Theme.of(context).secondaryHeaderColor,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: Padding(
@@ -77,9 +65,10 @@ class _ListsCarouselState extends State<ListsCarousel> {
                               Text(
                                 list.title,
                                 style: TextStyle(
-                                  fontSize: 22.0,
+                                  fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
                                   letterSpacing: 1.2,
+                                  color: Theme.of(context).primaryColor,
                                 ),
                               ),
                               SizedBox(height: 2.0),
