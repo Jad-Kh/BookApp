@@ -9,6 +9,7 @@ import '../models/user_model.dart';
 import 'package:flutter/material.dart';
 
 import '../providers/lists_provider.dart';
+import 'main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
             .getAuth(User.fromJson(response.data));
     //buildProfile(user);
     Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => HomeScreen()),
+        context, new MaterialPageRoute(builder: (context) => MainScreen()),
     );
   }
   

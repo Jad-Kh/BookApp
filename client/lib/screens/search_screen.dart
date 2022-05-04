@@ -9,6 +9,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   int _selectedItemIndex = 2;
+  bool pressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +69,9 @@ class _SearchScreenState extends State<SearchScreen> {
                           icon: Icon(Icons.search),
                           iconSize: 30, 
                           color: Theme.of(context).primaryColor, 
-                          onPressed: () {  },
+                          onPressed: () { pressed = true; setState(() {
+                            
+                          }); },
                         ),
                         hintText: "Write something here...",
                         hintStyle:
@@ -79,16 +82,14 @@ class _SearchScreenState extends State<SearchScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: SearchList(search: "0520221524", index: 0)),
+                  if(pressed) 
+                    SearchList(search: "0520221524", index: 0),
                 ],
               ),
             ),
           )
         ],
       ),
-      bottomNavigationBar: BottomNavbar(currentTab: 1),
     );
   }
 
