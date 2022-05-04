@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import '../providers/lists_provider.dart';
+import '../screens/add_list_screen.dart';
 import '../screens/book_screen.dart';
 import '../screens/search_screen.dart';
 
@@ -41,7 +42,7 @@ class _ListCarouselState extends State<ListCarousel> {
                   onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => SearchScreen(),
+                          builder: (_) => AddListScreen(list: widget.list),
                         ),
                       ),
                   child: Text(

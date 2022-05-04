@@ -90,14 +90,16 @@ exports.addBookToList = async(request, response) => {
     const listsRef = firebase.collection('lists')
     try {
         const list = await listsRef.where('title', '==', request.params.title).get()
-        if(list.data().items.includes(request.body.isbn)) {
-            return response.status(401).json('book is already in list')
-        } else {
-            await listsRef.doc(request.params.id).update({
-                items: FieldValue.arrayUnion(request.body.isbn)
-            })
-        }
-        return response.status(200).json('added book')
+        list.docs.map(async(doc) => {
+            if(doc.data().items.includes(request.body.isbn)) {
+                return response.status(401).json('book is already in list')
+            } else {
+                await listsRef.doc(doc.id).update({
+                    items: FieldValue.arrayUnion(request.body.isbn)
+                })
+            }
+            return response.status(200).json(doc.data().items)
+        })
     } catch(error) {
         return response.status(500).json(error)
     }

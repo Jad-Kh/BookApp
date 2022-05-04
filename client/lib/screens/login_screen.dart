@@ -21,27 +21,27 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   Future save() async {
+    print('alo');
     final prefs = await SharedPreferences.getInstance();
-      var response = await Dio().post("http:10.0.2.2:5050/api/auth/login",
+      var response = await Dio().post("http://10.0.2.2:5050/api/auth/login",
           data: <String, String>{'email': user.email, 'password': user.password});
       Provider.of<AuthProvider>(context, listen: false)
               .getAuth(User.fromJson(response.data));
-      await prefs.setString('username', user.username);
-      await prefs.setString('email', user.email);
-      await prefs.setString('password', user.password);
-      await prefs.setStringList('recommendations', user.recommendations);
-      await prefs.setInt('flag', user.flag);
-      await prefs.setBool("isLoggedIn", true);
+       await prefs.setString('username', user.username);
+       await prefs.setString('email', user.email);
+       await prefs.setString('password', user.password);
+       await prefs.setStringList('recommendations', user.recommendations);
+       await prefs.setInt('flag', user.flag);
+       await prefs.setBool("isLoggedIn", true);
       buildProfile(user);
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => MainScreen()),
       );
-
   }
   
   Future buildProfile(user) async {
     List<UserList> userLists = [];
-    var listResponse = await Dio().get('http:10.0.2.2:5050/api/lists/user/' + user.email);
+    var listResponse = await Dio().get('http://10.0.2.2:5050/api/lists/user/' + user.email);
     for (var item in listResponse.data) {
       UserList newList = UserList.fromJson(item);
       userLists.add(newList);
@@ -61,7 +61,6 @@ class _LoginScreenState extends State<LoginScreen> {
   
   void init() async {
     final prefs = await SharedPreferences.getInstance();
-
     if(prefs.getBool("isLoggedIn").toString() == "true")
     {
       user.username = prefs.getString('username').toString();

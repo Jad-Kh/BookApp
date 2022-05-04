@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     User currentUser = Provider.of<AuthProvider>(context).user;
-    //initializeBooks();
+    initializeBooks();
     return Scaffold(
       body: SafeArea(
         child: ListView(

@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../models/list_model.dart';
+import '../providers/lists_provider.dart';
 import '../screens/book_screen.dart';
 
 class AddSearchList extends StatefulWidget {
@@ -109,9 +111,11 @@ class _AddSearchListState extends State<AddSearchList> {
                                             GestureDetector(
                                               onTap: () async {
                                                 List<UserList> userLists = [];
-                                                  var listResponse = await Dio().put('http:10.0.2.2:5050/api/lists/add/' + widget.list.title,
+                                                  var listResponse = await Dio().put('http://10.0.2.2:5050/api/lists/add/' + widget.list.title,
                                                                                      data: {"isbn": book.isbn});
-                                                  setState(() {});
+                                                  setState(() {
+                                                    
+                                                  });
                                               },
                                               child: Column(
                                                 children: <Widget>[
@@ -119,7 +123,7 @@ class _AddSearchListState extends State<AddSearchList> {
                                                     FontAwesomeIcons.plusCircle,
                                                     color: Theme.of(context)
                                                         .secondaryHeaderColor,
-                                                    size: 20.0,
+                                                    size: 18.0,
                                                   ),
                                                 ],
                                               ),
