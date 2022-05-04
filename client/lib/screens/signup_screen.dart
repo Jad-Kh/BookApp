@@ -25,11 +25,9 @@ class _SignupScreenState extends State<SignupScreen> {
       username: "",
       email: "",
       password: "",
-      points: 0,
-      lists: [],
-      friends: [],
-      requests: [],
-      recommendations: []);
+      recommendations: [],
+      flag: 0
+  );
 
   @override
   Widget build(BuildContext context) {

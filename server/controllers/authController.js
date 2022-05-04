@@ -16,11 +16,8 @@ exports.createUser = async(request, response) => {
             username: request.body.username,
             email: request.body.email,
             password: hashedPassword,
-            points: 0,
-            lists: [],
-            friends: [],
-            requests: [],
-            recommendation: []
+            recommendations: [],
+            flag: 0
         }
 
         await usersRef.doc().set(user)

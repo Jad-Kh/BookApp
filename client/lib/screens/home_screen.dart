@@ -105,46 +105,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       letterSpacing: 1.5,
                     ),
                   ),
-                  Container(
-                    height: 25.0,
-                    width: 100.0,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
-                      borderRadius: BorderRadius.circular(50.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 8.0, left: 4.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            height: 20.0,
-                            width: 23.0,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 190, 117, 48),
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Icon(
-                              FontAwesomeIcons.coins,
-                              size: 13.0,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                          Text(
-                            currentUser.points.toString() + ' Points',
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
-            SizedBox(height: 40.0),
+            SizedBox(height: 35.0),
             BookCarousel(user: currentUser),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
