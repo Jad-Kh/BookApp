@@ -6,18 +6,20 @@ import 'package:flutter/material.dart';
 import 'package:client/models/user_model.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../models/list_model.dart';
 import '../screens/book_screen.dart';
 
-class SearchList extends StatefulWidget {
+class AddSearchList extends StatefulWidget {
   final String search;
   final int index;
-  SearchList({required this.search, required this.index});
+  UserList list;
+  AddSearchList({required this.search, required this.index, required this.list});
 
   @override
-  _SearchListState createState() => _SearchListState();
+  _AddSearchListState createState() => _AddSearchListState();
 }
 
-class _SearchListState extends State<SearchList> {
+class _AddSearchListState extends State<AddSearchList> {
   List<Book> list = [];
   var response;
   Future<List<Book>> getBooks() async {
@@ -104,15 +106,23 @@ class _SearchListState extends State<SearchList> {
                                                 maxLines: 2,
                                               ),
                                             ),
-                                            Column(
-                                              children: <Widget>[
-                                                Icon(
-                                                  FontAwesomeIcons.bookmark,
-                                                  color: Theme.of(context)
-                                                      .secondaryHeaderColor,
-                                                  size: 18.0,
-                                                ),
-                                              ],
+                                            GestureDetector(
+                                              onTap: () async {
+                                                List<UserList> userLists = [];
+                                                  var listResponse = await Dio().put('http:10.0.2.2:5050/api/lists/add/' + widget.list.title,
+                                                                                     data: {"isbn": book.isbn});
+                                                  setState(() {});
+                                              },
+                                              child: Column(
+                                                children: <Widget>[
+                                                  Icon(
+                                                    FontAwesomeIcons.plusCircle,
+                                                    color: Theme.of(context)
+                                                        .secondaryHeaderColor,
+                                                    size: 20.0,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),

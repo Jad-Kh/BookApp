@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import '../providers/lists_provider.dart';
 import '../screens/book_screen.dart';
+import '../screens/search_screen.dart';
 
 class ListCarousel extends StatefulWidget {
   final UserList list;
@@ -37,16 +38,22 @@ class _ListCarouselState extends State<ListCarousel> {
                 ),
               ),
               GestureDetector(
-                child: Text(
-                  'Add',
-                  style: TextStyle(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.0,
-                  ),
+                  onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => SearchScreen(),
+                        ),
+                      ),
+                  child: Text(
+                    'Add',
+                    style: TextStyle(
+                      color: Theme.of(context).secondaryHeaderColor,
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.0,
+                    ),
+                  )
                 ),
-              ),
             ],
           ),
         ),

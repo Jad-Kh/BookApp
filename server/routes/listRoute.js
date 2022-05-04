@@ -27,7 +27,7 @@ router.delete(
 )
 
 router.put(
-    "/add:/id",
+    "/add/:title",
     listsController.addBookToList
 )
 

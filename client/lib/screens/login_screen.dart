@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   Future save() async {
     final prefs = await SharedPreferences.getInstance();
-      var response = await Dio().post("http://10.0.2.2:5050/api/auth/login",
+      var response = await Dio().post("http:10.0.2.2:5050/api/auth/login",
           data: <String, String>{'email': user.email, 'password': user.password});
       Provider.of<AuthProvider>(context, listen: false)
               .getAuth(User.fromJson(response.data));
@@ -39,11 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   }
   
-  
   Future buildProfile(user) async {
     List<UserList> userLists = [];
-    print(user.email);
-    var listResponse = await Dio().get('http://10.0.2.2:5050/api/lists/user/' + user.email);
+    var listResponse = await Dio().get('http:10.0.2.2:5050/api/lists/user/' + user.email);
     for (var item in listResponse.data) {
       UserList newList = UserList.fromJson(item);
       userLists.add(newList);
@@ -73,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
       user.flag = prefs.getInt('flag')!;
           Provider.of<AuthProvider>(context, listen: false)
             .getAuth(user);
+      buildProfile(user);
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => MainScreen()),
       );
@@ -81,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+  //   TODO: implement initState
     super.initState();
     init();
   }
@@ -120,17 +119,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {
                       user.email = value;
                     },
-                    // validator: (value) {
-                    //   if (value!.isEmpty) {
-                    //     return 'Enter something';
-                    //   } else if (RegExp(
-                    //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    //       .hasMatch(value)) {
-                    //     return null;
-                    //   } else {
-                    //     return 'Enter valid email';
-                    //   }
-                    // },
+                     validator: (value) {
+                       if (value!.isEmpty) {
+                         return 'Enter something';
+                       } else if (RegExp(
+                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                           .hasMatch(value)) {
+                         return null;
+                       } else {
+                         return 'Enter valid email';
+                       }
+                     },
                     style: TextStyle(
                       color: Theme.of(context).primaryColor
                     ),
@@ -162,12 +161,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (value) {
                       user.password = value;
                     },
-                    // validator: (value) {
-                    //   if (value!.isEmpty) {
-                    //     return 'Enter something';
-                    //   }
-                    //   return null;
-                    // },
+                     validator: (value) {
+                       if (value!.isEmpty) {
+                         return 'Enter something';
+                       }
+                       return null;
+                     },
                     obscureText: true,
                     style: TextStyle(
                       color: Theme.of(context).primaryColor
@@ -202,11 +201,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0)),
                         onPressed: () {
-                          // if (_formKey.currentState!.validate()) {
+                           if (_formKey.currentState!.validate()) {
                             save();
-                        //   } else {
-                        //     print("not ok");
-                        //   }
+                           } else {
+                             print("not ok");
+                           }
                          },
                         child: Text(
                           "Log In",

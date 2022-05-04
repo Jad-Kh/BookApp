@@ -89,7 +89,7 @@ exports.deleteList = async(request, response) => {
 exports.addBookToList = async(request, response) => {
     const listsRef = firebase.collection('lists')
     try {
-        const list = await listsRef.doc(request.params.id).get()
+        const list = await listsRef.where('title', '==', request.params.title).get()
         if(list.data().items.includes(request.body.isbn)) {
             return response.status(401).json('book is already in list')
         } else {

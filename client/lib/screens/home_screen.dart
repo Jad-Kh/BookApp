@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentTab = 0;
   List<Book> magazineslist = [];
   List<Book> latestlist = [];
-  List<Book> typeslist = [];/*
+  List<Book> typeslist = [];
   var isbns = ["1594866260", "0520221524", "0689852185", "034546205X"];
   Future initializeBooks() async {
     var magazinesResponse = await Dio().get('http://10.0.2.2:5050/api/books/magazines');
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ;
     Provider.of<BookProvider>(context, listen: false)
             .getBooks(magazineslist, latestlist, typeslist);
-  }*/
+  }
   List<String> _options = ["Magazines", "Latest", "Your Types"];
 
   Widget _buildOption(int index) {
