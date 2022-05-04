@@ -38,7 +38,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Color.fromRGBO(44, 44, 44, 1), 
                                                                unselectedItemColor: Color.fromARGB(255, 77, 77, 77),
-                                                               selectedItemColor: Color.fromARGB(255, 255, 255, 255))
+                                                               selectedItemColor: Color.fromARGB(255, 255, 255, 255)),
+        textTheme: Theme.of(context).textTheme.apply(      bodyColor: Colors.white,      displayColor: Colors.white,   )
       ),
       routes: {
         '/login': (context) => LoginScreen(),
