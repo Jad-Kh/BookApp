@@ -7,8 +7,10 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  int _selectedItemIndex = 2;
   bool pressed = false;
+  int searchType = 0;
+  List<bool> options = [true, false, false, false];
+  TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,10 +43,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    buildExpenseBotton(Icons.numbers, "ISBN", true),
-                    buildExpenseBotton(Icons.title, "Title", false),
-                    buildExpenseBotton(Icons.publish, "Publisher", false),
-                    buildExpenseBotton(Icons.person, "Author", false),
+                    buildExpenseBotton(Icons.numbers, "ISBN", 0),
+                    buildExpenseBotton(Icons.title, "Title", 1),
+                    buildExpenseBotton(Icons.publish, "Publisher", 2),
+                    buildExpenseBotton(Icons.person, "Author", 3),
                   ],
                 ),
                 SizedBox(
@@ -63,14 +65,16 @@ class _SearchScreenState extends State<SearchScreen> {
                   Container(
                     width: MediaQuery.of(context).size.width / 2,
                     child: TextField(
+                      controller: _searchController,
                       decoration: InputDecoration(
                         prefixIcon: IconButton(
                           icon: Icon(Icons.search),
-                          iconSize: 30, 
-                          color: Theme.of(context).primaryColor, 
-                          onPressed: () { pressed = true; setState(() {
-                            
-                          }); },
+                          iconSize: 30,
+                          color: Theme.of(context).primaryColor,
+                          onPressed: () {
+                            pressed = true;
+                            setState(() {});
+                          },
                         ),
                         hintText: "Write something here...",
                         hintStyle:
@@ -81,8 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  if(pressed) 
-                    SearchList(search: "0520221524", index: 0),
+                  if (pressed) SearchList(search: _searchController.text, index: searchType),
                 ],
               ),
             ),
@@ -92,39 +95,46 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Container buildExpenseBotton(IconData icon, String title, bool isActive) {
-    return Container(
-      height: 70,
-      width: 70,
-      decoration: BoxDecoration(
-        color: isActive
-            ? Theme.of(context).accentColor
-            : Colors.black.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: isActive
-                ? Theme.of(context).secondaryHeaderColor
-                : Colors.white,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: isActive
+  GestureDetector buildExpenseBotton(IconData icon, String title, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          options = [false, false, false, false];
+          options[index] = true;
+          searchType = index;
+        });
+      },
+      child: Container(
+        height: 70,
+        width: 70,
+        decoration: BoxDecoration(
+          color: options[index] ? Colors.orange : Colors.black.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: options[index]
                   ? Theme.of(context).secondaryHeaderColor
                   : Colors.white,
             ),
-          )
-        ],
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: options[index]
+                    ? Theme.of(context).secondaryHeaderColor
+                    : Colors.white,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

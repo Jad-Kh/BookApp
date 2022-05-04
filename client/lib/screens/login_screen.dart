@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
       await prefs.setStringList('recommendations', user.recommendations);
       await prefs.setInt('flag', user.flag);
       await prefs.setBool("isLoggedIn", true);
-      //buildProfile(user);
+      buildProfile(user);
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => MainScreen()),
       );
@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
   
   
-  /*Future buildProfile(user) async {
+  Future buildProfile(user) async {
     List<UserList> userLists = [];
     print(user.email);
     var listResponse = await Dio().get('http://10.0.2.2:5050/api/lists/user/' + user.email);
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ;
         Provider.of<ListProvider>(context, listen: false)
             .getLists(userLists);
-  }*/
+  }
 
   User user = User(
       username: "",
