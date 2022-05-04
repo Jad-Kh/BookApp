@@ -1,4 +1,3 @@
-import 'package:client/widgets/bottom_navbar.dart';
 import 'package:client/widgets/search_list.dart';
 import 'package:flutter/material.dart';
 

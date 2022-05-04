@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import '../models/book_model.dart';
 import '../providers/book_provider.dart';
 import '../providers/lists_provider.dart';
-import '../widgets/bottom_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
 

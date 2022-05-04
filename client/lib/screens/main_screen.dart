@@ -1,7 +1,6 @@
 import 'package:client/screens/home_screen.dart';
 import 'package:client/screens/lists_screen.dart';
 import 'package:client/screens/search_screen.dart';
-import 'package:client/widgets/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

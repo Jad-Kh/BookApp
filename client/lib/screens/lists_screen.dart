@@ -4,7 +4,6 @@ import '../models/list_model.dart';
 import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
 import '../providers/lists_provider.dart';
-import '../widgets/bottom_navbar.dart';
 import '../widgets/list_carousel.dart';
 
 class ListsScreen extends StatelessWidget {
