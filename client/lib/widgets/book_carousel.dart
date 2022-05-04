@@ -13,7 +13,7 @@ class BookCarousel extends StatefulWidget {
   _BookCarouselState createState() => _BookCarouselState();
 }
 
-class _BookCarouselState extends State<BookCarousel> {
+class _BookCarouselState extends State<BookCarousel> {/*
   var isbns = ["0062747827", "0809117541", "0520221524"]; 
   List<Book> books = []; 
   Future<List<Book>> getBooks() async {
@@ -24,12 +24,12 @@ class _BookCarouselState extends State<BookCarousel> {
       list.add(newBook);
     }
     return list;
-  }
+  }*/
   
   @override
   Widget build(BuildContext context) { 
     return FutureBuilder<List<Book>>(
-      future: getBooks(),
+      //future: getBooks(),
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.done) {
           return Column(
@@ -67,7 +67,7 @@ class _BookCarouselState extends State<BookCarousel> {
             height: 325.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: isbns.length,
+              //itemCount: isbns.length,
               itemBuilder: (BuildContext context, int index) {
                 Book book = snapshot.data!.elementAt(index);
                 return GestureDetector(

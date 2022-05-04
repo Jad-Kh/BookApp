@@ -24,13 +24,13 @@ class _LoginScreenState extends State<LoginScreen> {
         data: <String, String>{'email': user.email, 'password': user.password});
     Provider.of<AuthProvider>(context, listen: false)
             .getAuth(User.fromJson(response.data));
-    buildProfile(user);
+    //buildProfile(user);
     Navigator.push(
         context, new MaterialPageRoute(builder: (context) => HomeScreen()),
     );
   }
   
-  Future buildProfile(user) async {
+  /*Future buildProfile(user) async {
     List<UserList> userLists = [];
     print(user.email);
     var listResponse = await Dio().get('http://10.0.2.2:5050/api/lists/user/' + user.email);
@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
     ;
         Provider.of<ListProvider>(context, listen: false)
             .getLists(userLists);
-  }
+  }*/
 
   User user = User(
       username: "",

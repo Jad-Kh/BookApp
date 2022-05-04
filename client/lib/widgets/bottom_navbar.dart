@@ -4,6 +4,7 @@ import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
 import '../screens/home_screen.dart';
 import '../screens/lists_screen.dart';
+import '../screens/search_screen.dart';
 
 class BottomNavbar extends StatefulWidget {
   int currentTab;
@@ -31,6 +32,10 @@ class _BottomNavbarState extends State<BottomNavbar> {
               Navigator.push(
                 context, new MaterialPageRoute(builder: (context) => HomeScreen())
               );
+            if(value == 1)
+              Navigator.push(
+                context, new MaterialPageRoute(builder: (context) => SearchScreen())
+              );
             if(value == 3)
               Navigator.push(
                 context, new MaterialPageRoute(builder: (context) => ListsScreen())
@@ -55,11 +60,11 @@ class _BottomNavbarState extends State<BottomNavbar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.person,
+                Icons.book,
                 color: widget.currentTab == 2 ? Theme.of(context).primaryColor : Theme.of(context).secondaryHeaderColor,
                 size: 30.0,
               ),
-              label: "Profile",            
+              label: "Stores",            
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -68,6 +73,14 @@ class _BottomNavbarState extends State<BottomNavbar> {
                 size: 30.0,
               ),
               label: "Lists",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.settings,
+                color: widget.currentTab == 4 ? Theme.of(context).primaryColor : Theme.of(context).secondaryHeaderColor,
+                size: 30.0,
+              ),
+              label: "Settings",
             ),
           ],
         ),
