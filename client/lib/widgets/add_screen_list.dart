@@ -113,9 +113,8 @@ class _AddSearchListState extends State<AddSearchList> {
                                                 List<UserList> userLists = [];
                                                   var listResponse = await Dio().put('http://10.0.2.2:5050/api/lists/add/' + widget.list.title,
                                                                                      data: {"isbn": book.isbn});
-                                                  setState(() {
-                                                    
-                                                  });
+                                                  setState(() {});
+                                                  Navigator.pop(context);
                                               },
                                               child: Column(
                                                 children: <Widget>[
