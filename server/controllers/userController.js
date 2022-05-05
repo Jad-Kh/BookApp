@@ -1,6 +1,20 @@
 const { firebase } = require("../admin")
 const { FieldValue } = require('firebase-admin/firestore');
 
+exports.getUserId = async(request, response) => {
+    const usersRef = firebase.collection('users')
+    try {
+        const user = await usersRef.where("email", "==", request.params.email).get()
+        let userId;
+        user.docs.map((doc) => {
+            userId = doc.id
+        })
+        return response.status(200).json(userId)
+    } catch(error) {
+        return response.status(500).json(error)
+    }
+}
+
 exports.getUser = async(request, response) => {
     const usersRef = firebase.collection('users')
     try {

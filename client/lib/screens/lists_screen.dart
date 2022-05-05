@@ -46,8 +46,7 @@ class ListsScreen extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           letterSpacing: 1.0,
                         ),
-                      )
-                    ),
+                      )),
                 ],
               ),
             ),
@@ -55,20 +54,28 @@ class ListsScreen extends StatelessWidget {
             for (UserList list in lists) ListCarousel(list: list),
             Row(
               children: [
-                Container(
-                  height: 50.0,
-                  width: 100.0,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).accentColor,
-                    borderRadius: BorderRadius.circular(5.0),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ModifyListScreen(action: "delete"),
+                    ),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 13.0, left: 20.0),
-                    child: Text(
-                      'Delete',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Theme.of(context).primaryColor,
+                  child: Container(
+                    height: 50.0,
+                    width: 100.0,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).accentColor,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 13.0, left: 20.0),
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
                     ),
                   ),

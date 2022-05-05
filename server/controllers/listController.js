@@ -79,7 +79,12 @@ exports.updateList = async(request, response) => {
 exports.deleteList = async(request, response) => {
     const listsRef = firebase.collection('lists')
     try {
-        await listsRef.doc(request.params.id).delete()
+        const list = await listsRef.where('title', '==', request.params.title).get()
+        var listId;
+        list.docs.map(async(doc) => {
+            listId = doc.id
+        })
+        await listsRef.doc(listId).delete()
         return response.status(200).json('deleted')
     } catch(error) {
         return response.status(500).json(error)

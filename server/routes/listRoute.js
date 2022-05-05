@@ -22,7 +22,7 @@ router.put(
 )
 
 router.delete(
-    "/:id",
+    "/:title",
     listsController.deleteList
 )
 

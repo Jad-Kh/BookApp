@@ -2,6 +2,12 @@ const router = require('express').Router();
 const usersController = require('../controllers/userController');
 
 router.get(
+    '/userId/:email',
+    usersController.getUserId
+);
+
+
+router.get(
     '/:id',
     usersController.getUser
 );
