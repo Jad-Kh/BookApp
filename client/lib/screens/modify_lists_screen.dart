@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/book_model.dart';
 import '../models/list_model.dart';
 import '../models/user_model.dart';
 import '../providers/auth_provider.dart';
@@ -9,7 +10,8 @@ import '../providers/lists_provider.dart';
 
 class ModifyListScreen extends StatefulWidget {
   final String action;
-  ModifyListScreen({required this.action});
+  final Book book;
+  ModifyListScreen({required this.action, required this.book});
 
   @override
   _ModifyListScreenState createState() => _ModifyListScreenState();
@@ -171,17 +173,63 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
         ),
       );
     } else {
-      return Container();
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          elevation: 1,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.orange,
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
+        body: Column(
+          children: [
+            Text(
+              "Choose which list to add that book to: ",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            SizedBox(height: 30),
+            for(var list in lists)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 40),
+              child: TextField(
+                readOnly: true,
+                decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      onPressed: () async {
+                        List<UserList> userLists = [];
+                        var listResponse = await Dio().put('http://10.0.2.2:5050/api/lists/add/' + list.title,
+                            data: {"isbn": widget.book.isbn});
+                        setState(() {});
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.remove_circle,
+                        color: Theme.of(context).secondaryHeaderColor,
+                        size: 25,
+                      ),
+                    ),
+                    labelStyle: TextStyle(color: Colors.orange),
+                    fillColor: Theme.of(context).primaryColor,
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    hintText: list.title,
+                    hintStyle: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
+                    )),
+              ),
+            ),
+          ],
+        ),
+      );
     }
   }
 }
-
-/*
-                      IconButton(
-                        onPressed: () async {
-                          var listResponse = await Dio().delete(
-                              'http://10.0.2.2:5050/api/lists/' + list.title);
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.remove_circle),
-                      )      */ 

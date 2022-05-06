@@ -24,8 +24,8 @@ class _BookCarouselState extends State<BookCarousel> {/*
       list.add(newBook);
     }
     return list;
-  }*/
-  
+  }
+  */
   @override
   Widget build(BuildContext context) { 
     return FutureBuilder<List<Book>>(

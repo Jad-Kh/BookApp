@@ -1,3 +1,4 @@
+import 'package:client/models/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/list_model.dart';
@@ -35,7 +36,19 @@ class ListsScreen extends StatelessWidget {
                       onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => ModifyListScreen(action: "add"),
+                              builder: (_) => ModifyListScreen(action: "add", book: new Book(
+                                  isbn: "", 
+                                  title: "", 
+                                  publisher: "", 
+                                  date: "", 
+                                  description: "", 
+                                  pages: 0, 
+                                  categories: [], 
+                                  ratingaverage: 0.001, 
+                                  ratingnumber: 0, 
+                                  thumbnail: ""
+                                ),
+                              ),
                             ),
                           ),
                       child: Text(
@@ -58,7 +71,19 @@ class ListsScreen extends StatelessWidget {
                   onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => ModifyListScreen(action: "delete"),
+                      builder: (_) => ModifyListScreen(action: "delete", book: new Book(
+                                  isbn: "", 
+                                  title: "", 
+                                  publisher: "", 
+                                  date: "", 
+                                  description: "", 
+                                  pages: 0, 
+                                  categories: [], 
+                                  ratingaverage: 0.001, 
+                                  ratingnumber: 0, 
+                                  thumbnail: ""
+                                ),
+                              ),
                     ),
                   ),
                   child: Container(

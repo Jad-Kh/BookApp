@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'modify_lists_screen.dart';
+
 class BookScreen extends StatefulWidget {
   final Book book;
   BookScreen({required this.book});
@@ -21,7 +23,7 @@ class _BookScreenState extends State<BookScreen> {
 
   _updateState() {
     setState(() {
-      if(_large) {
+      if (_large) {
         _containerHeight = 350;
         _paddingBelow = 310;
         _fontSize = 18;
@@ -57,12 +59,13 @@ class _BookScreenState extends State<BookScreen> {
                   child: ClipRRect(
                     child: Opacity(
                       opacity: 0.5,
-                        child: widget.book.thumbnail.isEmpty ? Placeholder()
+                      child: widget.book.thumbnail.isEmpty
+                          ? Placeholder()
                           : Image.network(
-                          "${widget.book.thumbnail}",
-                          width: 100,
-                          fit: BoxFit.fill,
-                        ),
+                              "${widget.book.thumbnail}",
+                              width: 100,
+                              fit: BoxFit.fill,
+                            ),
                     ),
                   ),
                 ),
@@ -86,32 +89,29 @@ class _BookScreenState extends State<BookScreen> {
                     ),
                     Row(
                       children: <Widget>[
-                        _large 
-                        ?
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(175, 130, 130, 130),
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: IconButton(
-                            icon: Icon(FontAwesomeIcons.sortAmountUp),
-                            iconSize: 25.0,
-                            color: Theme.of(context).primaryColor,
-                            onPressed: () => _updateState()
-                          ),
-                        ) : 
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(175, 130, 130, 130),
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: IconButton(
-                            icon: Icon(FontAwesomeIcons.sortAmountDown),
-                            iconSize: 25.0,
-                            color: Theme.of(context).primaryColor,
-                            onPressed: () => _updateState()
-                          ),
-                        ),
+                        _large
+                            ? Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(175, 130, 130, 130),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: IconButton(
+                                    icon: Icon(FontAwesomeIcons.sortAmountUp),
+                                    iconSize: 25.0,
+                                    color: Theme.of(context).primaryColor,
+                                    onPressed: () => _updateState()),
+                              )
+                            : Container(
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(175, 130, 130, 130),
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                child: IconButton(
+                                    icon: Icon(FontAwesomeIcons.sortAmountDown),
+                                    iconSize: 25.0,
+                                    color: Theme.of(context).primaryColor,
+                                    onPressed: () => _updateState()),
+                              ),
                       ],
                     ),
                   ],
@@ -130,12 +130,13 @@ class _BookScreenState extends State<BookScreen> {
                     child: Hero(
                       tag: widget.book.thumbnail,
                       child: ClipRRect(
-                        child: widget.book.thumbnail.isEmpty ? Placeholder()
-                          : Image.network(
-                          "${widget.book.thumbnail}",
-                          width: 100,
-                          fit: BoxFit.fill,
-                        ),
+                        child: widget.book.thumbnail.isEmpty
+                            ? Placeholder()
+                            : Image.network(
+                                "${widget.book.thumbnail}",
+                                width: 100,
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     ),
                   ),
@@ -183,7 +184,8 @@ class _BookScreenState extends State<BookScreen> {
                             Visibility(
                               visible: _large,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Padding(
                                     padding: const EdgeInsets.only(top: 27.0),
@@ -195,16 +197,20 @@ class _BookScreenState extends State<BookScreen> {
                                           child: Icon(
                                             FontAwesomeIcons.solidStar,
                                             size: 20.0,
-                                            color: Theme.of(context).primaryColor,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 10.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 10.0),
                                           child: Text(
-                                            widget.book.ratingaverage.toString(),
+                                            widget.book.ratingaverage
+                                                .toString(),
                                             style: TextStyle(
                                               fontSize: 17.0,
-                                              color: Theme.of(context).primaryColor,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                             ),
                                           ),
                                         ),
@@ -221,16 +227,19 @@ class _BookScreenState extends State<BookScreen> {
                                           child: Icon(
                                             FontAwesomeIcons.solidCalendar,
                                             size: 20.0,
-                                            color: Theme.of(context).primaryColor,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 10.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 10.0),
                                           child: Text(
                                             widget.book.date,
                                             style: TextStyle(
                                               fontSize: 17.0,
-                                              color: Theme.of(context).primaryColor,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                             ),
                                           ),
                                         ),
@@ -247,16 +256,19 @@ class _BookScreenState extends State<BookScreen> {
                                           child: Icon(
                                             FontAwesomeIcons.bookOpen,
                                             size: 20.0,
-                                            color: Theme.of(context).primaryColor,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 10.0),
+                                          padding:
+                                              const EdgeInsets.only(top: 10.0),
                                           child: Text(
                                             widget.book.pages.toString(),
                                             style: TextStyle(
                                               fontSize: 17.0,
-                                              color: Theme.of(context).primaryColor,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                             ),
                                           ),
                                         ),
@@ -302,7 +314,8 @@ class _BookScreenState extends State<BookScreen> {
                                   height: _textHeight,
                                   width: 320.0,
                                   child: Padding(
-                                    padding: const EdgeInsets.only(top: 10.0, left: 15.0),
+                                    padding: const EdgeInsets.only(
+                                        top: 10.0, left: 15.0),
                                     child: Text(
                                       widget.book.description,
                                       style: TextStyle(
@@ -339,23 +352,31 @@ class _BookScreenState extends State<BookScreen> {
                       ),
                     ),
                     SizedBox(width: 20.0),
-                    Container(
-                      height: 50.0,
-                      width: 255.0,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).accentColor,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 13.0, left: 105.0),
-                        child: Text(
-                          'Add',
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Theme.of(context).primaryColor,
+                    GestureDetector(
+                      child: Container(
+                        height: 50.0,
+                        width: 255.0,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.only(top: 13.0, left: 105.0),
+                          child: Text(
+                            'Add',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              color: Theme.of(context).primaryColor,
+                            ),
                           ),
                         ),
                       ),
+                      onTap: () => {
+                        MaterialPageRoute(
+                         builder: (context) => ModifyListScreen(action: "addbook", book: widget.book)
+                         ),
+                      },
                     ),
                   ],
                 ),
