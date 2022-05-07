@@ -18,11 +18,13 @@ const authRoute = require('../server/routes/authRoute');
 const userRoute = require('../server/routes/userRoute');
 const bookRoute = require('../server/routes/bookRoute');
 const listRoute = require('../server/routes/listRoute');
+const pythonRoute = require('../server/routes/pythonRoute');
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/books", bookRoute);
 app.use("/api/lists", listRoute);
+app.use("/api/python", pythonRoute);
 
 app.listen(PORT, () => {
     console.log(`Running Backend on Port ${PORT}`);
