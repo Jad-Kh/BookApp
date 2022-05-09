@@ -4,7 +4,7 @@ const axios = require('axios')
 
 exports.get = async(request, response) => {
     try {
-        const suggestions = await axios.get("http://127.0.0.1:5000/")
+        const suggestions = await axios.get("http://127.0.0.1:5000/" + request.params.title)
         
         return response.status(200).json(suggestions.data)
     } catch(error) {
