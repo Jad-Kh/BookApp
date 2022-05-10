@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/book_model.dart';
 import '../models/list_model.dart';
@@ -91,12 +92,13 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                         var userId = await Dio().get(
                             'http://10.0.2.2:5050/api/users/userId/' +
                                 currentUser.email);
-                        print(userId);
                         var listResponse = await Dio()
                             .post('http://10.0.2.2:5050/api/lists/new', data: {
                           "title": _listname.text,
                           "userId": userId.toString()
                         });
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('flag', 0);
                         Navigator.pop(context);
                       },
                       color: Colors.orange,
@@ -150,6 +152,8 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                     suffixIcon: IconButton(
                       onPressed: () async {
                         var listResponse = await Dio().delete('http://10.0.2.2:5050/api/lists/' + list.title);
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('flag', 0);
                         Navigator.pop(context);
                       },
                       icon: Icon(
@@ -207,6 +211,8 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
                         List<UserList> userLists = [];
                         var listResponse = await Dio().put('http://10.0.2.2:5050/api/lists/add/' + list.title,
                             data: {"isbn": widget.book.isbn});
+                        final prefs = await SharedPreferences.getInstance();
+                        prefs.setInt('flag', 0);
                         setState(() {});
                         Navigator.pop(context);
                       },

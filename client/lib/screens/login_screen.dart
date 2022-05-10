@@ -5,10 +5,12 @@ import 'package:client/screens/signup_screen.dart';
 import 'package:client/providers/auth_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/book_model.dart';
 import '../models/list_model.dart';
 import '../models/user_model.dart';
 import 'package:flutter/material.dart';
 import '../providers/lists_provider.dart';
+import '../providers/recommendation_provider.dart';
 import 'main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,7 +23,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   Future save() async {
-    print('alo');
     final prefs = await SharedPreferences.getInstance();
       var response = await Dio().post("http://10.0.2.2:5050/api/auth/login",
           data: <String, String>{'email': user.email, 'password': user.password});
@@ -51,6 +52,20 @@ class _LoginScreenState extends State<LoginScreen> {
             .getLists(userLists);
   }
 
+  Future buildRecommendation(user) async {
+    final prefs = await SharedPreferences.getInstance();
+      List<Book> list = [];
+      var listResponse = await Dio().get('http://10.0.2.2:5050/api/python/' + user.email);
+      for (var item in listResponse.data) {
+        Book book = Book.fromJson(item);
+        list.add(book);
+      }
+      ;
+      Provider.of<RecommendationProvider>(context, listen: false)
+          .getList(list);
+      prefs.setInt('flag', 1);
+  }
+
   User user = User(
       username: "",
       email: "",
@@ -71,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Provider.of<AuthProvider>(context, listen: false)
             .getAuth(user);
       buildProfile(user);
+      buildRecommendation(user);
       Navigator.push(
           context, new MaterialPageRoute(builder: (context) => MainScreen()),
       );
