@@ -173,7 +173,9 @@ class _BookScreenState extends State<BookScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  widget.book.publisher,
+                                  widget.book.publisher == "none"
+                                    ? " "
+                                    : widget.book.publisher,
                                   style: TextStyle(
                                     fontSize: 13.0,
                                     color: Theme.of(context).primaryColor,
@@ -205,7 +207,9 @@ class _BookScreenState extends State<BookScreen> {
                                           padding:
                                               const EdgeInsets.only(top: 10.0),
                                           child: Text(
-                                            widget.book.ratingaverage
+                                            widget.book.ratingaverage == 0.001
+                                              ? "??"
+                                              : widget.book.ratingaverage
                                                 .toString(),
                                             style: TextStyle(
                                               fontSize: 17.0,
@@ -264,7 +268,10 @@ class _BookScreenState extends State<BookScreen> {
                                           padding:
                                               const EdgeInsets.only(top: 10.0),
                                           child: Text(
-                                            widget.book.pages.toString(),
+                                            widget.book.pages == 0 
+                                              ? "??"
+                                              : widget.book.pages
+                                                .toString(),
                                             style: TextStyle(
                                               fontSize: 17.0,
                                               color: Theme.of(context)
