@@ -47,7 +47,7 @@ class _ModifyListScreenState extends State<ModifyListScreen> {
             child: ListView(
               children: [
                 Text(
-                  "Edit Profile",
+                  "Add List",
                   style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
                 ),
                 SizedBox(
