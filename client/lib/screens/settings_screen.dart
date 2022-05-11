@@ -1,5 +1,7 @@
+import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinbox/material.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -7,6 +9,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  TextEditingController _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +46,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 10,
             ),
             buildAccountOptionRow(context, "Change password"),
-            buildAccountOptionRow(context, "Language"),
-            buildAccountOptionRow(context, "Location"),
+            buildAccountOptionRow(context, "Country"),
             buildAccountOptionRow(context, "Recommendations"),
+            SpinBox(
+              min: 3,
+              max: 8,
+              value: 6,
+              incrementIcon: Icon(
+                Icons.add_circle_outline,
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+              decrementIcon: Icon(
+                Icons.remove_circle_outline,
+                color: Theme.of(context).secondaryHeaderColor,
+              ),
+              onChanged: (value) => {},
+            ),
             SizedBox(
               height: 40,
             ),
@@ -88,28 +105,81 @@ class _SettingsScreenState extends State<SettingsScreen> {
   GestureDetector buildAccountOptionRow(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(title),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("Option 1", style: TextStyle(color: Colors.grey)),
-                    Text("Option 2", style: TextStyle(color: Colors.grey)),
-                    Text("Option 3", style: TextStyle(color: Colors.grey)),
-                  ],
-                ),
-                actions: [
-                  FlatButton(
+        if (title == "Change password") {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text(title),
+                  backgroundColor: Theme.of(context).secondaryHeaderColor,
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextField(
+                        controller: _password,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(bottom: 3),
+                            labelText: "New Password",
+                            labelStyle: TextStyle(color: Colors.orange),
+                            fillColor: Theme.of(context).primaryColor,
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
+                            hintText: "Enter new password",
+                            hintStyle: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColor,
+                            )),
+                      ),
+                    ],
+                  ),
+                  actions: [
+                    FlatButton(
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: Text("Close")),
-                ],
-              );
-            });
+                      child: Text(
+                        "Save",
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ],
+                );
+              });
+        } else {
+          if (title == "Country") {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(title),
+                    backgroundColor: Theme.of(context).secondaryHeaderColor,
+                    content: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        CountryListPick(
+                          initialSelection: '+961',
+                          onChanged: (CountryCode? code) {},
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Save",
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor),
+                        ),
+                      ),
+                    ],
+                  );
+                });
+          } else {
+            if (title == "Recommendations") {}
+          }
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -121,12 +191,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
+                color: Theme.of(context).secondaryHeaderColor,
               ),
             ),
             Icon(
               Icons.arrow_forward_ios,
-              color: Colors.grey,
+              color: Theme.of(context).secondaryHeaderColor,
             ),
           ],
         ),

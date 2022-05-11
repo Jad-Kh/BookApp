@@ -34,6 +34,8 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   provider: ^6.0.2
   shared_preferences: ^2.0.13
+  country_list_pick: ^1.0.1
+  flutter_spinbox: ^0.9.0
 
 dev_dependencies:
   flutter_test:
