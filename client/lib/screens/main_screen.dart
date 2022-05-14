@@ -2,6 +2,7 @@ import 'package:client/screens/home_screen.dart';
 import 'package:client/screens/lists_screen.dart';
 import 'package:client/screens/search_screen.dart';
 import 'package:client/screens/settings_screen.dart';
+import 'package:client/screens/stores_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   List<Widget> widgets = [
     HomeScreen(),
     SearchScreen(),
-    Scaffold(), // Store (Google Map stuff)
+    StoreScreen(), 
     ListsScreen(),
     SettingsScreen(), 
   ];
