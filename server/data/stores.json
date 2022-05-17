@@ -1,0 +1,92 @@
+[
+    {
+        "store": 1,
+        "lat": 33.889884885011476,
+        "lng": 35.4949439316988,
+        "name": "Mneimneh Bookstore" 
+    },
+    {
+        "store": 2,
+        "lat": 33.897045384840624,
+        "lng": 35.504932142794125,
+        "name": "Bible Soceity Bookshop" 
+    },
+    {
+        "store": 3,
+        "lat": 33.870072029548915,
+        "lng": 35.50388876348734,
+        "name": "Halabi Bookshop" 
+    },
+    {
+        "store": 4,
+        "lat": 33.88704851630978,
+        "lng": 35.518228858709335,
+        "name": "Librairie Antoine - Achrafieh"
+    },
+    {
+        "store": 5,
+        "lat": 33.87663126768219,
+        "lng": 35.53908906877041,
+        "name": "Librairie Antoine - Sin el Fil"
+    },
+    {
+        "store": 6,
+        "lat": 33.89801968288184,
+        "lng": 35.564787313342094,
+        "name": "MALIKS - Citymall"
+    },
+    {
+        "store": 7,
+        "lat": 33.92643139382451,
+        "lng": 35.58820232748985,
+        "name": "Librairie Antoine - ABC Dbayye"
+    },
+    {
+        "store": 8,
+        "lat": 33.92780066849871,
+        "lng": 35.62690190970898,
+        "name": "Halim Mazraat Yachouh"
+    },
+    {
+        "store": 9,
+        "lat": 33.92911038889425,
+        "lng": 35.619920790195465,
+        "name": "MADY Bookshop"
+    },
+    {
+        "store": 10,
+        "lat": 33.89553507564334,
+        "lng": 35.48203647136688,
+        "name": "Librairie Antoine - Hamra"        
+    },
+    {
+        "store": 11,
+        "lat": 33.89420591463108,
+        "lng": 35.48526484519244,
+        "name": "Multiverse"        
+    },
+    {
+        "store": 12,
+        "lat": 33.89553034457935,
+        "lng": 35.483479499816895,
+        "name": "MALIKS - Hamra"        
+    },
+    {
+        "store": 13,
+        "lat": 33.89818136908333,
+        "lng": 35.48745386302471,
+        "name": "Libraire Internationale"         
+    },
+    {
+        "store": 14,
+        "lat": 33.89791170638378,
+        "lng": 35.48079192638397,
+        "name": "Book Bazar"         
+    },
+    {
+        "store": 15,
+        "lat": 33.89688647941988,
+        "lng": 35.481077916920185,
+        "name": "The Little Bookshop"         
+    }
+]

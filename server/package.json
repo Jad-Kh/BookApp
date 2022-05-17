@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.13",
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
