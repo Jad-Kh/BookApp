@@ -116,133 +116,135 @@ class _StoreScreenState extends State<StoreScreen> {
                 future: getStores(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 0.0),
-                          child: Expanded(
-                            child: SizedBox(
-                              height: 200,
-                              child: ListView.builder(
-                                padding:
-                                    EdgeInsets.only(top: 10.0, bottom: 15.0),
-                                itemCount: 5,
-                                itemBuilder: (BuildContext context, int index) {
-                                  Store store = snapshot.data!.elementAt(index);
-                                  return Stack(
-                                    children: <Widget>[
-                                      Container(
-                                        margin: EdgeInsets.fromLTRB(
-                                            40.0, 0.0, 20.0, 0.0),
-                                        height: 120.0,
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .scaffoldBackgroundColor,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              88.0, 0.0, 4.0, 3.0),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Container(
-                                                    width: 180.0,
-                                                    height: 55.0,
-                                                    child: Text(
-                                                      store.name,
-                                                      style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        fontSize: 18.0,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                    return SizedBox(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 0.0),
+                            child: Expanded(
+                              child: SizedBox(
+                                height: 200,
+                                child: ListView.builder(
+                                  padding:
+                                      EdgeInsets.only(top: 10.0, bottom: 15.0),
+                                  itemCount: 5,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    Store store = snapshot.data!.elementAt(index);
+                                    return Stack(
+                                      children: <Widget>[
+                                        Container(
+                                          margin: EdgeInsets.fromLTRB(
+                                              40.0, 0.0, 20.0, 0.0),
+                                          height: 120.0,
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            color: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                88.0, 0.0, 4.0, 3.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Container(
+                                                      width: 180.0,
+                                                      height: 55.0,
+                                                      child: Text(
+                                                        store.name,
+                                                        style: TextStyle(
+                                                          color: Theme.of(context)
+                                                              .primaryColor,
+                                                          fontSize: 18.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                        overflow:
+                                                            TextOverflow.ellipsis,
+                                                        maxLines: 2,
                                                       ),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 2,
+                                                    ),
+                                                    Column(
+                                                      children: <Widget>[
+                                                        IconButton(
+                                                          onPressed: () => _addMarker(LatLng(store.lat, store.lng)), 
+                                                        icon:Icon(
+                                                            Icons.center_focus_strong,
+                                                            color: Theme.of(context).secondaryHeaderColor,
+                                                            size: 26.0,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.all(5.0),
+                                                  width: 125.0,
+                                                  decoration: BoxDecoration(
+                                                    color: Color.fromARGB(255, 158, 74, 5),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                  ),
+                                                  alignment: Alignment.center,
+                                                  child: Text(
+                                                    store.distance.toString().substring(0,4) + " Km",
+                                                    style: TextStyle(
+                                                      color: Color.fromARGB(255, 228, 107, 8),
+                                                      fontSize: 18.0,
                                                     ),
                                                   ),
-                                                  Column(
-                                                    children: <Widget>[
-                                                      IconButton(
-                                                        onPressed: () => _addMarker(LatLng(store.lat, store.lng)), 
-                                                      icon:Icon(
-                                                          Icons.center_focus_strong,
-                                                          color: Theme.of(context).secondaryHeaderColor,
-                                                          size: 26.0,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black26,
+                                                offset: Offset(0.0, 2.0),
+                                                blurRadius: 6.0,
                                               ),
-                                              Container(
-                                                padding: EdgeInsets.all(5.0),
-                                                width: 125.0,
-                                                decoration: BoxDecoration(
-                                                  color: Color.fromARGB(255, 158, 74, 5),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          5.0),
-                                                ),
-                                                alignment: Alignment.center,
-                                                child: Text(
-                                                  store.distance.toString().substring(0,4) + " Km",
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(255, 228, 107, 8),
-                                                    fontSize: 18.0,
-                                                  ),
-                                                ),
-                                              )
                                             ],
                                           ),
-                                        ),
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black26,
-                                              offset: Offset(0.0, 2.0),
-                                              blurRadius: 6.0,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            child: Image.asset(
+                                              'assets/images/Shoplogo.jpg',  
+                                              height: 120.0,
+                                              width: 120.0,
+                                              fit: BoxFit.fill,
                                             ),
-                                          ],
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                          child: Image.asset(
-                                            'assets/images/Shoplogo.jpg',  
-                                            height: 120.0,
-                                            width: 120.0,
-                                            fit: BoxFit.fill,
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     );
                   } else {
                     return Container();
