@@ -22,32 +22,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   int _currentTab = 0;
-  List<Book> magazineslist = [];
-  List<Book> latestlist = [];
-  List<Book> typeslist = [];
-  var isbns = ["1594866260", "0520221524", "0689852185", "034546205X"];
-  Future initializeBooks() async {
-    var magazinesResponse = await Dio().get('http://10.0.2.2:5050/api/books/magazines');
-    var latestResponse = await Dio().get('http://10.0.2.2:5050/api/books/newest');
-    for (var item in magazinesResponse.data) {
-      Book newBook = Book.fromJson(item);
-      magazineslist.add(newBook);
-    }
-    ;
-    for (var item in latestResponse.data) {
-      Book newBook = Book.fromJson(item);
-      latestlist.add(newBook);
-    }
-    ;
-    for (var isbn in isbns) {
-      var typesResponse = await Dio().get('http://10.0.2.2:5050/api/books/' + isbn);
-      Book newBook = Book.fromJson(typesResponse.data[0]);
-      typeslist.add(newBook);
-    }
-    ;
-    Provider.of<BookProvider>(context, listen: false)
-            .getBooks(magazineslist, latestlist, typeslist);
-  }
   List<String> _options = ["Magazines", "Latest", "Your Types"];
 
   Widget _buildOption(int index) {
@@ -73,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     User currentUser = Provider.of<AuthProvider>(context).user;
-    initializeBooks();
     return Scaffold(
       body: SafeArea(
         child: ListView(

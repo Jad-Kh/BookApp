@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'modify_lists_screen.dart';
 
 class BookScreen extends StatefulWidget {

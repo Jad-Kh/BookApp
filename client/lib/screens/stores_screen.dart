@@ -1,16 +1,8 @@
 import 'package:client/models/store_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:provider/provider.dart';
-import '../models/book_model.dart';
-import '../models/directions_model.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import '../providers/book_provider.dart';
-import '../providers/directions_repository.dart';
 
 class StoreScreen extends StatefulWidget {
   const StoreScreen({Key? key}) : super(key: key);
