@@ -6,7 +6,6 @@ router.get(
     usersController.getUserId
 );
 
-
 router.get(
     '/:id',
     usersController.getUser
@@ -15,6 +14,11 @@ router.get(
 router.put(
     '/:id',
     usersController.updateUser
+);
+
+router.put(
+    '/password/:id',
+    usersController.updatePassword
 );
 
 router.delete(

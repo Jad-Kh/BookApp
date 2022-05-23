@@ -32,9 +32,12 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setString('username', user.username);
     await prefs.setString('email', user.email);
     await prefs.setString('password', user.password);
-    await prefs.setStringList('recommendations', user.recommendations);
+    await prefs.setInt('recommendations', user.recommendations);
     await prefs.setInt('flag', user.flag);
     await prefs.setBool("isLoggedIn", true);
+    await buildProfile(user);
+    await buildRecommendation(user);
+    await initializeBooks();
     Navigator.push(
       context,
       new MaterialPageRoute(builder: (context) => MainScreen()),
@@ -98,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   User user =
-      User(username: "", email: "", password: "", recommendations: [], flag: 0);
+      User(username: "", email: "", password: "", recommendations: 6, flag: 0);
 
   void init() async {
     final prefs = await SharedPreferences.getInstance();
@@ -108,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
       user.username = prefs.getString('username').toString();
       user.email = prefs.getString('email').toString();
       user.password = prefs.getString('password').toString();
-      user.recommendations = prefs.getStringList('recommendations')!;
+      user.recommendations = prefs.getInt('recommendations')!;
       user.flag = prefs.getInt('flag')!;
       Provider.of<AuthProvider>(context, listen: false).getAuth(user);
       await buildProfile(user);

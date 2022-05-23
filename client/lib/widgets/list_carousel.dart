@@ -53,8 +53,7 @@ class _ListCarouselState extends State<ListCarousel> {
                       fontWeight: FontWeight.w600,
                       letterSpacing: 1.0,
                     ),
-                  )
-                ),
+                  )),
             ],
           ),
         ),
@@ -166,8 +165,13 @@ class _ListCarouselState extends State<ListCarousel> {
                               tag: book.thumbnail,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
-                                child: book.thumbnail.isEmpty
-                                    ? Placeholder()
+                                child: book.thumbnail == 'none'
+                                    ? Image.asset(
+                                        'assets/images/notfound.jpg',
+                                        height: 200.0,
+                                        width: 250.0,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Image.network(
                                         "${book.thumbnail}",
                                         width: 200,

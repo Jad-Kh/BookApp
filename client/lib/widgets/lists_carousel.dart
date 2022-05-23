@@ -98,13 +98,19 @@ class _ListsCarouselState extends State<ListsCarousel> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
-                        child: list.items.isEmpty ? Placeholder()
-                        : Image.network(
-                          "${list.items[0].thumbnail}",
-                          height: 180.0,
-                          width: 220.0,
-                          fit: BoxFit.fill,
-                        ),
+                        child: list.items.isEmpty
+                            ? Image.asset(
+                                'assets/images/notfound.jpg',
+                                height: 180.0,
+                                width: 220.0,
+                                fit: BoxFit.fill,
+                              )
+                            : Image.network(
+                                "${list.items[0].thumbnail}",
+                                height: 180.0,
+                                width: 220.0,
+                                fit: BoxFit.fill,
+                              ),
                       ),
                     )
                   ],

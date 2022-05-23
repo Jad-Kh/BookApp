@@ -1,5 +1,6 @@
 const { firebase } = require("../admin")
 const { FieldValue } = require('firebase-admin/firestore');
+const bcrypt = require("bcrypt")
 
 exports.getUserId = async(request, response) => {
     const usersRef = firebase.collection('users')
@@ -29,6 +30,18 @@ exports.updateUser = async(request, response) => {
     const usersRef = firebase.collection('users')
     try {
         await usersRef.doc(request.params.id).update(request.body)
+        return response.status(200).json('update')
+    } catch(error) {
+        return response.status(500).json(error)
+    }
+}
+
+exports.updatePassword = async(request, response) => {
+    const usersRef = firebase.collection('users')
+    try {
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(request.body.password, salt)
+        await usersRef.doc(request.params.id).update({password: hashedPassword})
         return response.status(200).json('update')
     } catch(error) {
         return response.status(500).json(error)

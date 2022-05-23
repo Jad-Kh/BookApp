@@ -283,8 +283,12 @@ class _SearchListState extends State<SearchList> {
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(7.0),
-                                      child: book.thumbnail.isEmpty
-                                          ? Placeholder()
+                                      child: book.thumbnail == 'none'
+                                          ? Image.asset(
+                                              'assets/images/notfound.jpg',
+                                              width: 100.0,
+                                              fit: BoxFit.fill,
+                                            )
                                           : Image.network(
                                               "${book.thumbnail}",
                                               width: 100,

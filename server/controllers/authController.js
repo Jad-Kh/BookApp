@@ -16,7 +16,7 @@ exports.createUser = async(request, response) => {
             username: request.body.username,
             email: request.body.email,
             password: hashedPassword,
-            recommendations: [],
+            recommendations: 6,
             flag: 0
         }
 

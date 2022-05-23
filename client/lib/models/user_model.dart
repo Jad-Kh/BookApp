@@ -2,7 +2,7 @@ class User {
   String username;
   String email;
   String password;
-  List<String> recommendations;
+  int recommendations;
   int flag;
 
   User({
@@ -14,13 +14,12 @@ class User {
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    var recommendationObj = json['recommendations'];
 
     return User(
       username: json['username'],
       email: json['email'],
       password: json['password'],
-      recommendations: new List<String>.from(recommendationObj),
+      recommendations: json['recommendations'],
       flag: json['flag'],
     );
   }

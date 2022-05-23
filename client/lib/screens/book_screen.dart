@@ -58,8 +58,12 @@ class _BookScreenState extends State<BookScreen> {
                   child: ClipRRect(
                     child: Opacity(
                       opacity: 0.5,
-                      child: widget.book.thumbnail.isEmpty
-                          ? Placeholder()
+                      child: widget.book.thumbnail == 'none'
+                          ? Image.asset(
+                              'assets/images/notfound.jpg',
+                              width: 100.0,
+                              fit: BoxFit.fill,
+                            )
                           : Image.network(
                               "${widget.book.thumbnail}",
                               width: 100,
@@ -129,8 +133,12 @@ class _BookScreenState extends State<BookScreen> {
                     child: Hero(
                       tag: widget.book.thumbnail,
                       child: ClipRRect(
-                        child: widget.book.thumbnail.isEmpty
-                            ? Placeholder()
+                        child: widget.book.thumbnail == 'none'
+                            ? Image.asset(
+                                'assets/images/notfound.jpg',
+                                width: 100.0,
+                                fit: BoxFit.fill,
+                              )
                             : Image.network(
                                 "${widget.book.thumbnail}",
                                 width: 100,
@@ -144,7 +152,7 @@ class _BookScreenState extends State<BookScreen> {
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(left: 20.0, top: _paddingInfo),
+                    padding: EdgeInsets.only(left: 35.0, top: _paddingInfo),
                     child: Container(
                       height: _infoSize,
                       width: 320.0,
@@ -173,8 +181,8 @@ class _BookScreenState extends State<BookScreen> {
                               children: [
                                 Text(
                                   widget.book.publisher == "none"
-                                    ? " "
-                                    : widget.book.publisher,
+                                      ? " "
+                                      : widget.book.publisher,
                                   style: TextStyle(
                                     fontSize: 13.0,
                                     color: Theme.of(context).primaryColor,
@@ -207,9 +215,9 @@ class _BookScreenState extends State<BookScreen> {
                                               const EdgeInsets.only(top: 10.0),
                                           child: Text(
                                             widget.book.ratingaverage == 0.001
-                                              ? "??"
-                                              : widget.book.ratingaverage
-                                                .toString(),
+                                                ? "??"
+                                                : widget.book.ratingaverage
+                                                    .toString(),
                                             style: TextStyle(
                                               fontSize: 17.0,
                                               color: Theme.of(context)
@@ -267,10 +275,9 @@ class _BookScreenState extends State<BookScreen> {
                                           padding:
                                               const EdgeInsets.only(top: 10.0),
                                           child: Text(
-                                            widget.book.pages == 0 
-                                              ? "??"
-                                              : widget.book.pages
-                                                .toString(),
+                                            widget.book.pages == 0
+                                                ? "??"
+                                                : widget.book.pages.toString(),
                                             style: TextStyle(
                                               fontSize: 17.0,
                                               color: Theme.of(context)
@@ -317,7 +324,7 @@ class _BookScreenState extends State<BookScreen> {
                             Scrollbar(
                               child: SingleChildScrollView(
                                 child: Container(
-                                  height: _textHeight,
+                                  height: _textHeight + 50,
                                   width: 320.0,
                                   child: Padding(
                                     padding: const EdgeInsets.only(
@@ -341,7 +348,7 @@ class _BookScreenState extends State<BookScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: _paddingBelow, left: 15.0),
+                padding: EdgeInsets.only(top: _paddingBelow + 70, left: 25.0),
                 child: Row(
                   children: <Widget>[
                     Container(
@@ -358,14 +365,14 @@ class _BookScreenState extends State<BookScreen> {
                       ),
                     ),
                     SizedBox(width: 20.0),
-                    GestureDetector(
-                      child: Container(
-                        height: 50.0,
-                        width: 255.0,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).accentColor,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
+                    Container(
+                      height: 50.0,
+                      width: 255.0,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).accentColor,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: GestureDetector(
                         child: Padding(
                           padding:
                               const EdgeInsets.only(top: 13.0, left: 105.0),
@@ -377,12 +384,12 @@ class _BookScreenState extends State<BookScreen> {
                             ),
                           ),
                         ),
+                        onLongPress: () => {
+                          MaterialPageRoute(
+                              builder: (context) => ModifyListScreen(
+                                  action: "addbook", book: widget.book)),
+                        },
                       ),
-                      onTap: () => {
-                        MaterialPageRoute(
-                         builder: (context) => ModifyListScreen(action: "addbook", book: widget.book)
-                         ),
-                      },
                     ),
                   ],
                 ),

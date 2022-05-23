@@ -25,7 +25,7 @@ class _SignupScreenState extends State<SignupScreen> {
       username: "",
       email: "",
       password: "",
-      recommendations: [],
+      recommendations: 6,
       flag: 0
   );
 

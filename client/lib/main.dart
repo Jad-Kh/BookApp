@@ -37,11 +37,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 255, 255, 255),
-        secondaryHeaderColor: const Color.fromARGB(255, 77, 77, 77),
+        secondaryHeaderColor: Color.fromARGB(255, 122, 122, 122),
         scaffoldBackgroundColor: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: Colors.orange,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(backgroundColor: Color.fromRGBO(44, 44, 44, 1), 
-                                                               unselectedItemColor: Color.fromARGB(255, 77, 77, 77),
+                                                               unselectedItemColor: Color.fromARGB(255, 122, 122, 122),
                                                                selectedItemColor: Color.fromARGB(255, 255, 255, 255)),
         textTheme: Theme.of(context).textTheme.apply(      bodyColor: Colors.white,      displayColor: Colors.white,   )
       ),

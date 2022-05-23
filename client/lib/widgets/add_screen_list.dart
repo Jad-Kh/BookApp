@@ -16,7 +16,8 @@ class AddSearchList extends StatefulWidget {
   final String search;
   final int index;
   UserList list;
-  AddSearchList({required this.search, required this.index, required this.list});
+  AddSearchList(
+      {required this.search, required this.index, required this.list});
 
   @override
   _AddSearchListState createState() => _AddSearchListState();
@@ -112,12 +113,16 @@ class _AddSearchListState extends State<AddSearchList> {
                                             GestureDetector(
                                               onTap: () async {
                                                 List<UserList> userLists = [];
-                                                  var listResponse = await Dio().put('http://10.0.2.2:5050/api/lists/add/' + widget.list.title,
-                                                                                     data: {"isbn": book.isbn});
-                                                  final prefs = await SharedPreferences.getInstance();
-                                                  prefs.setInt('flag', 0);
-                                                  setState(() {});
-                                                  Navigator.pop(context);
+                                                var listResponse = await Dio().put(
+                                                    'http://10.0.2.2:5050/api/lists/add/' +
+                                                        widget.list.title,
+                                                    data: {"isbn": book.isbn});
+                                                final prefs =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                prefs.setInt('flag', 0);
+                                                setState(() {});
+                                                Navigator.pop(context);
                                               },
                                               child: Column(
                                                 children: <Widget>[
@@ -299,8 +304,12 @@ class _AddSearchListState extends State<AddSearchList> {
                                     ),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(7.0),
-                                      child: book.thumbnail.isEmpty
-                                          ? Placeholder()
+                                      child: book.thumbnail == 'none'
+                                          ? Image.asset(
+                                              'assets/images/notfound.jpg',
+                                              width: 100.0,
+                                              fit: BoxFit.fill,
+                                            )
                                           : Image.network(
                                               "${book.thumbnail}",
                                               width: 100,

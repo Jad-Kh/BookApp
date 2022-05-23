@@ -4,7 +4,9 @@ import 'package:client/models/book_model.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/list_model.dart';
+import '../providers/auth_provider.dart';
 import '../providers/recommendation_provider.dart';
 import '../screens/book_screen.dart';
 
@@ -28,24 +30,12 @@ class _BookCarouselState extends State<BookCarousel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Explore',
+                'Recommendation',
                 style: TextStyle(
                   color: Theme.of(context).primaryColor,
                   fontSize: 22.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5,
-                ),
-              ),
-              GestureDetector(
-                onTap: () => print('See More'),
-                child: Text(
-                  'See More',
-                  style: TextStyle(
-                    color: Theme.of(context).secondaryHeaderColor,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 1.0,
-                  ),
                 ),
               ),
             ],
@@ -55,7 +45,7 @@ class _BookCarouselState extends State<BookCarousel> {
           height: 325.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 6,
+            itemCount: Provider.of<AuthProvider>(context).user.recommendations,
             itemBuilder: (BuildContext context, int index) {
               Book book = list[index];
               return GestureDetector(
@@ -159,8 +149,13 @@ class _BookCarouselState extends State<BookCarousel> {
                               tag: book.thumbnail,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10.0),
-                                child: book.thumbnail.isEmpty
-                                    ? Placeholder()
+                                child: book.thumbnail == 'none'
+                                    ? Image.asset(
+                                        'assets/images/notfound.jpg',
+                                        height: 250.0,
+                                        width: 250.0,
+                                        fit: BoxFit.fill,
+                                      )
                                     : Image.network(
                                         "${book.thumbnail}",
                                         width: 200,

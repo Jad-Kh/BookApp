@@ -1,7 +1,14 @@
 import 'package:country_list_pick/country_list_pick.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinbox/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/user_model.dart';
+import '../providers/auth_provider.dart';
+import 'login_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -11,8 +18,51 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   TextEditingController _password = TextEditingController();
 
+  String userId = '0';
+  int recommendations = 6;
+
+  void change(user, value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt('recommendations', value.toInt());
+    var response =
+        await Dio().get('http://10.0.2.2:5050/api/users/userId/' + user.email);
+    userId = response.data;
+    await Dio().put('http://10.0.2.2:5050/api/users/' + userId,
+        data: {'recommendations': value});
+    Provider.of<AuthProvider>(context, listen: false)
+        .updateRecommendations(value);
+    setState(() {});
+  }
+
+  void init() async {
+    final prefs = await SharedPreferences.getInstance();
+    recommendations = prefs.getInt('recommendations')!;
+  }
+
+  void password(user, newPassword) async {
+    var response =
+        await Dio().get('http://10.0.2.2:5050/api/users/userId/' + user.email);
+    userId = response.data;
+    await Dio().put('http://10.0.2.2:5050/api/users/password/' + userId,
+        data: {'password': newPassword});
+    setState(() {});
+  }
+
+  void signout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isLoggedIn', false);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    init();
+  }
+
   @override
   Widget build(BuildContext context) {
+    User user = Provider.of<AuthProvider>(context).user;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -45,13 +95,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 10,
             ),
-            buildAccountOptionRow(context, "Change password"),
-            buildAccountOptionRow(context, "Country"),
-            buildAccountOptionRow(context, "Recommendations"),
+            buildAccountOptionRow(context, "Change password", user),
+            buildAccountOptionRow(context, "Country", user),
+            buildAccountOptionRow(context, "Recommendations", user),
             SpinBox(
               min: 3,
               max: 8,
-              value: 6,
+              value: recommendations.toDouble(),
               incrementIcon: Icon(
                 Icons.add_circle_outline,
                 color: Theme.of(context).secondaryHeaderColor,
@@ -60,7 +110,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Icons.remove_circle_outline,
                 color: Theme.of(context).secondaryHeaderColor,
               ),
-              onChanged: (value) => {},
+              onChanged: (value) => {change(user, value)},
             ),
             SizedBox(
               height: 40,
@@ -68,7 +118,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Center(
               child: RaisedButton(
                 padding: EdgeInsets.symmetric(horizontal: 40),
-                onPressed: () {},
+                onPressed: () {
+                  signout();
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(builder: (context) => LoginScreen()),
+                  );
+                },
                 color: Colors.orange,
                 child: Text("Sign Out",
                     style: TextStyle(
@@ -102,7 +158,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  GestureDetector buildAccountOptionRow(BuildContext context, String title) {
+  GestureDetector buildAccountOptionRow(
+      BuildContext context, String title, User user) {
     return GestureDetector(
       onTap: () {
         if (title == "Change password") {
@@ -135,6 +192,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   actions: [
                     FlatButton(
                       onPressed: () {
+                        password(user, _password.text);
                         Navigator.of(context).pop();
                       },
                       child: Text(
